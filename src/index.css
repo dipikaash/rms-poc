@@ -22,3 +22,13 @@
   float: right;
   margin: 0%;
 }
+.detailHead{
+  margin-bottom: 50px;
+}
+.addEmp {
+  float: right;
+}
+.even {
+  background-color: lightgrey;
+}
+
