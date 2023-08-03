@@ -18,7 +18,7 @@ const Header = () => {
                 <ul>
                     <li><Link to="/"><Button>Home</Button></Link></li>
                     <li><Link to="aboutUs"><Button>About Us</Button></Link></li>
-                    {isAuthenticated && (<li><Tooltip title="Profile"><Button variant="text"><AccountCircleIcon />{user.name}</Button></Tooltip></li>)}
+                    {isAuthenticated && (<li><Tooltip title="Profile"><Link to={`addEmployee?user=${user.email}`}><Button variant="text"><AccountCircleIcon />{user.name}</Button></Link></Tooltip></li>)}
                     {isAuthenticated ? (<li><Tooltip title="Log out">
                         <IconButton aria-label="logout" variant="contained" color="error" size="small"
                             onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>

@@ -27,8 +27,12 @@
 }
 .addEmp {
   float: right;
+  margin-right: 10px;
 }
 .even {
   background-color: lightgrey;
+}
+.radio-flex{
+  flex-direction: row;
 }
 

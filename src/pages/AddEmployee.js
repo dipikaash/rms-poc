@@ -1,0 +1,164 @@
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Input } from '@mui/material';
+import { useParams } from "react-router-dom";
+
+const defaultTheme = createTheme();
+
+export default function AddEmployee() {
+    const email = useParams();
+    console.log("email value",email);
+    const data=require('../utils/data.json');
+    const empRows= data.empsDetails; 
+    const employee = data.empList;
+    console.log(typeof(empRows));
+    const [isActive, setIsActive] = React.useState(true);
+    const handleActiveChange = (event)=>{
+        setIsActive(event.target.checked);
+    }
+    const [isAdmin, setIsAdmin] = React.useState(false);
+    const handleAdminChange = (event)=>{
+        setIsAdmin(event.target.checked);
+    }    
+  const handleSubmit = (event) => {
+    console.log(event)
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const formInput = {
+        firstName: data.get('firstName'),
+        lastName: data.get('lastName'),
+        email: data.get('email'),
+        password: data.get('password'),
+        isAdmin: data.get('isAdmin'),
+        isActive: data.get('isActive'),
+        poolJoinedDate: data.get('poolJoinedDate'),
+        poolEndDate: data.get('poolEndDate')
+      };
+    if(!formInput.isAdmin)
+      empRows.push(formInput);
+    employee.push(formInput);
+
+    console.log(empRows,employee);
+  };
+
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+
+          <Typography component="h1" variant="h5">
+            Add Employee
+          </Typography>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={4}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="firstName"
+                  required
+                  id="firstName"
+                  label="First Name"
+                  type='text'
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  type='text'
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  type='email'
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox value="true" checked={isAdmin}
+                  onChange={handleAdminChange}
+                  inputProps={{ 'aria-label': 'controlled' }} color="primary" />}
+                  label="Are you an admin?"
+                  name='isAdmin'
+                />
+              </Grid>
+         {!isAdmin && (<>
+              <Grid item xs={12} sm={6}>
+                <Input
+                  name="poolJoinedDate"
+                  type='date'
+                  required
+                  id="poolJoinedDate"
+                  label="Pool Joined Date"
+
+                />
+              </Grid>      
+              <Grid item xs={12} sm={6}>
+                <Input
+                  autoComplete="given-name"
+                  name="poolEndDate"
+                  label="Pool End Date"
+                  type="date"
+                  id="poolEndDate"
+                />
+              </Grid>    
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox 
+                  value={isActive}    
+                  checked={isActive}
+                  onChange={handleActiveChange}
+                  inputProps={{ 'aria-label': 'controlled' }} color="primary" />}
+                  label="Are you an active?"
+                  name = "isActive"
+                />
+              </Grid></> ) }                
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Submit
+            </Button>
+            <Grid container justifyContent="flex-end">
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
+  );
+}

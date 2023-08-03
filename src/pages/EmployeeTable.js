@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import { useState } from 'react';
 
 const empCols = [
-    { field: 'id', headerName: 'ID', width: 70 },
     {
         field: 'fullName',
         headerName: 'Name',
@@ -27,7 +27,8 @@ const empCols = [
 
 function EmployeeTable() {
     const data=require('../utils/data.json');
-    const empRows= data.empsDetails;      
+    const empRows= data.empsDetails;     
+    const [select, setSelection] = useState([]);
     return (
         <div style={{ height: 400, width: '100%' }}>
             <DataGrid
@@ -38,8 +39,15 @@ function EmployeeTable() {
                         paginationModel: { page: 0, pageSize: 5 },
                     },
                 }}
+                getRowId={(row) => row?.email}
                 pageSizeOptions={[5, 10]}
                 checkboxSelection
+                onSelectionModelChange={(ids) => {
+                    const selectedIDs = new Set(ids);
+                    const selectedRowData = empRows.filter((row) =>
+                      selectedIDs.has(row.email.toString()));
+                    console.log(selectedRowData);
+                  }}
                 getRowClassName={(params) =>
                     params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'}
             />
