@@ -27,7 +27,7 @@
 }
 .addEmp {
   float: right;
-  margin-right: 10px;
+  margin-right: 10px !important;
 }
 .even {
   background-color: lightgrey;
