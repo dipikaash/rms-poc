@@ -10,17 +10,20 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Input } from '@mui/material';
-import { useParams } from "react-router-dom";
+import { useState } from 'react';
 
 const defaultTheme = createTheme();
 
 export default function AddEmployee() {
-    const email = useParams();
-    console.log("email value",email);
     const data=require('../utils/data.json');
-    const empRows= data.empsDetails; 
+    const empRows = data.empsDetails; 
     const employee = data.empList;
-    console.log(typeof(empRows));
+    const [inputs, setInputs] = useState({});
+    const handleInputsChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setInputs(values => ({...values, [name]: value}))
+      }
     const [isActive, setIsActive] = React.useState(true);
     const handleActiveChange = (event)=>{
         setIsActive(event.target.checked);
@@ -30,24 +33,26 @@ export default function AddEmployee() {
         setIsAdmin(event.target.checked);
     }    
   const handleSubmit = (event) => {
-    console.log(event)
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const formInput = {
-        firstName: data.get('firstName'),
-        lastName: data.get('lastName'),
-        email: data.get('email'),
-        password: data.get('password'),
-        isAdmin: data.get('isAdmin'),
-        isActive: data.get('isActive'),
-        poolJoinedDate: data.get('poolJoinedDate'),
-        poolEndDate: data.get('poolEndDate')
-      };
-    if(!formInput.isAdmin)
-      empRows.push(formInput);
-    employee.push(formInput);
+    // console.log(event)
+     event.preventDefault();
+     inputs.isActive = isActive;
+     inputs.isAdmin = isAdmin;
+     console.log(inputs);
+    // const data = new FormData(event.currentTarget);
+    // const formInput = {
+    //     firstName: data.get('firstName'),
+    //     lastName: data.get('lastName'),
+    //     email: data.get('email'),
+    //     password: data.get('password'),
+    //     isAdmin: data.get('isAdmin'),
+    //     isActive: data.get('isActive'),
+    //     poolJoinedDate: data.get('poolJoinedDate'),
+    //     poolEndDate: data.get('poolEndDate')
+    //   };
+    if(!inputs.isAdmin)
+      empRows.push(inputs);
+    employee.push(inputs);
 
-    console.log(empRows,employee);
   };
 
   return (
@@ -66,7 +71,7 @@ export default function AddEmployee() {
           <Typography component="h1" variant="h5">
             Add Employee
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -75,6 +80,8 @@ export default function AddEmployee() {
                   id="firstName"
                   label="First Name"
                   type='text'
+                  value={inputs.firstName || ""}
+                  onChange={handleInputsChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -83,6 +90,8 @@ export default function AddEmployee() {
                   label="Last Name"
                   name="lastName"
                   type='text'
+                  value={inputs.lastName || ""}
+                  onChange={handleInputsChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -93,6 +102,8 @@ export default function AddEmployee() {
                   label="Email Address"
                   name="email"
                   type='email'
+                  value={inputs.email || ""}
+                  onChange={handleInputsChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -103,11 +114,13 @@ export default function AddEmployee() {
                   label="Password"
                   type="password"
                   id="password"
+                  value={inputs.password || ""}
+                  onChange={handleInputsChange}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="true" checked={isAdmin}
+                  control={<Checkbox value={isAdmin}checked={isAdmin}
                   onChange={handleAdminChange}
                   inputProps={{ 'aria-label': 'controlled' }} color="primary" />}
                   label="Are you an admin?"
@@ -122,7 +135,8 @@ export default function AddEmployee() {
                   required
                   id="poolJoinedDate"
                   label="Pool Joined Date"
-
+                  value={inputs.poolJoinedDate || ""}
+                  onChange={handleInputsChange}
                 />
               </Grid>      
               <Grid item xs={12} sm={6}>
@@ -132,6 +146,8 @@ export default function AddEmployee() {
                   label="Pool End Date"
                   type="date"
                   id="poolEndDate"
+                  value={inputs.poolEndDate || ""}
+                  onChange={handleInputsChange}
                 />
               </Grid>    
               <Grid item xs={12}>
