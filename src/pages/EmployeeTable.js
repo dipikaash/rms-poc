@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
@@ -107,6 +107,7 @@ const navigate = useNavigate();
     navigate(`/addEmployee/?email=${cellValues.row.email}`)
  }
  const handleDeleteClick = (event, cellValues)=>{
+    const confirm = window.confirm(`Are you sure to delete the record of ${cellValues.row.firstName} ?`);
     console.log("clicked delete", event, cellValues.row);
     const list = JSON.parse(localStorage.getItem('list'));
     const initialList = JSON.parse(localStorage.getItem('initialList'));
@@ -121,12 +122,21 @@ const navigate = useNavigate();
     //   console.log();
  }
  
-
-  const data = require('../utils/data.json');
-  localStorage.setItem('initialList', JSON.stringify(data.empsDetails));
-  localStorage.setItem('admins', JSON.stringify(data.empList));
+  const [data, setData] = useState();
+  useEffect(()=>{
+    // fetch('http://localhost:3000/empsDetails')
+    // .then((response) =>{ return response.json()})
+    // .then((result)=>{ setData(result)})
+    // axios.get('http://localhost:3000/empsDetails')
+    // .then(res => setData(res.data))
+    // .catch(err=> console.log(err))
+  },[]);
+  console.log(data);
+  const data2 = require('../utils/data.json');
+  localStorage.setItem('initialList', JSON.stringify(data2.empsDetails));
+  localStorage.setItem('admins', JSON.stringify(data2.empList));
   const initialData = JSON.parse(localStorage.getItem('initialList'));
-  const addedData = JSON.parse(localStorage.getItem('list'));
+  const addedData = JSON.parse(localStorage.getItem('list')) || [];
   const empRows = [
     ...initialData,
     ...addedData.filter((el) => !el.isAdmin),

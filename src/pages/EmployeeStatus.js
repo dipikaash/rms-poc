@@ -1,5 +1,12 @@
+import { useSearchParams } from 'react-router-dom';
+
 const EmployeeStatus = () =>{
-    return (<div>Employee Status</div>)
+    let [searchParams] = useSearchParams();
+    const email = searchParams.get('email');
+
+    return (<div>
+        
+    </div>)
 }
 
 export default EmployeeStatus;
