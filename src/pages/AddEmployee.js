@@ -57,8 +57,7 @@ export default function AddEmployee() {
     if (email) {
       const list = JSON.parse(localStorage.getItem('list'));
       const initialList = JSON.parse(localStorage.getItem('initialList'));
-      const myData = initialList.find((el)=> el.email == email) || list.find((el) => el.email == email) ;
-      console.log(myData.poolJoinedDate);
+      const myData = initialList.find((el)=> el.email == email) || list.find((el) => el.email == email);
       if (myData) {
         setInputs({
           firstName: myData.firstName,
