@@ -15,11 +15,9 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 const defaultTheme = createTheme();
 
 export default function AddEmployee() {
-  const data = require('../utils/data.json');
-  const empRows = data.empsDetails;
   let [searchParams] = useSearchParams();
   const email = searchParams.get('email');
-  const employee = data.empList;
+
   const [inputs, setInputs] = useState({});
   const navigate = useNavigate();
   const handleInputsChange = (event) => {
@@ -44,11 +42,23 @@ export default function AddEmployee() {
     let list = localStorage.getItem('list');
     if (list) {
       list = JSON.parse(list);
-      const newlist = [...list, inputs];
-      localStorage.setItem('list', JSON.stringify(newlist));
+      const existingData = list.find((el) => el.email == inputs.email);
+      if (existingData) {
+        list = list.map((el) => {
+          if (el.email == inputs.email) {
+            let obj = { ...el, ...inputs };
+            return obj;
+          } else return el;
+        });
+        localStorage.setItem('list', JSON.stringify(list));
+      } else {
+        const newlist = [...list, inputs];
+        localStorage.setItem('list', JSON.stringify(newlist));
+      }
     } else {
       localStorage.setItem('list', JSON.stringify([inputs]));
     }
+
     navigate('/');
     setInputs({});
   };
@@ -56,8 +66,7 @@ export default function AddEmployee() {
   React.useEffect(() => {
     if (email) {
       const list = JSON.parse(localStorage.getItem('list'));
-      const initialList = JSON.parse(localStorage.getItem('initialList'));
-      const myData = initialList.find((el)=> el.email == email) || list.find((el) => el.email == email);
+      const myData = list.find((el) => el.email == email);
       if (myData) {
         setInputs({
           firstName: myData.firstName,
@@ -66,7 +75,7 @@ export default function AddEmployee() {
           isAdmin: myData.isAdmin,
           password: myData.password,
           poolJoinedDate: myData.poolJoinedDate,
-          poolEndDate: myData.poolEndDate
+          poolEndDate: myData.poolEndDate,
         });
       }
     }
