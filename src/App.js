@@ -5,6 +5,7 @@ import AboutUs from './pages/AboutUs';
 import EmployeeData from './pages/EmployeeData';
 import Login from './pages/Login';
 import AddEmployee from './pages/AddEmployee';
+import EmployeeStatus from './pages/EmployeeStatus';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="home" element={<Home />} />
           <Route path="aboutUs" element={<AboutUs />} />
           <Route path="addEmployee" element={<AddEmployee/>} />
+          <Route path="employeeStatus" element={<EmployeeStatus />} />
         </Route>
         <Route path='/' element={<Login/>}></Route>
       </Routes>

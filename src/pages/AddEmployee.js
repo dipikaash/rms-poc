@@ -44,18 +44,21 @@ export default function AddEmployee() {
     let list = localStorage.getItem('list');
     if (list) {
       list = JSON.parse(list);
-      list = [...list, inputs];
-      localStorage.setItem('list', JSON.stringify(list));
+      const newlist = [...list, inputs];
+      localStorage.setItem('list', JSON.stringify(newlist));
     } else {
       localStorage.setItem('list', JSON.stringify([inputs]));
     }
     navigate('/');
     setInputs({});
   };
+
   React.useEffect(() => {
     if (email) {
       const list = JSON.parse(localStorage.getItem('list'));
-      const myData = list.find((el) => el.email == email);
+      const initialList = JSON.parse(localStorage.getItem('initialList'));
+      const myData = initialList.find((el)=> el.email == email) || list.find((el) => el.email == email) ;
+      console.log(myData.poolJoinedDate);
       if (myData) {
         setInputs({
           firstName: myData.firstName,
@@ -63,6 +66,8 @@ export default function AddEmployee() {
           lastName: myData.lastName,
           isAdmin: myData.isAdmin,
           password: myData.password,
+          poolJoinedDate: myData.poolJoinedDate,
+          poolEndDate: myData.poolEndDate
         });
       }
     }

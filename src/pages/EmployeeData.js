@@ -9,7 +9,6 @@ const EmployeeData = () => {
     return (
         <>
             <h2 className="detailHead">Detailes of Employees in Pool
-            <Tooltip title="Delete Employee"><Fab className="addEmp" color="error" aria-label="delete"><DeleteIcon /></Fab></Tooltip>
                 <Tooltip title="Add Employee">
                 <Link to="addEmployee"><Fab className="addEmp" color="primary" aria-label="add"><AddIcon /></Fab></Link>
                 </Tooltip>

@@ -3,6 +3,11 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
+function EmployeeTable() {
 const empCols = [
   {
     field: 'fullName',
@@ -17,13 +22,13 @@ const empCols = [
     headerName: 'Email ID',
     headerClassName: 'main-header',
     type: 'email',
-    width: 250,
+    width: 230,
   },
   {
     field: 'primarySkills',
     headerClassName: 'main-header',
     headerName: 'Skillset',
-    width: 220,
+    width: 200,
   },
   {
     field: 'poolJoinedDate',
@@ -46,17 +51,86 @@ const empCols = [
       return params.row.isActive ? 'Active' : 'Inactive';
     },
   },
+  {
+    field: "Edit",
+    headerName: "",
+    width: 40,
+    renderCell: (cellValues) => {
+      return (
+        <EditIcon
+          variant="contained"
+          color="secondary"
+          onClick={(event) => {
+            handleEditClick(event, cellValues);
+          }}
+        />
+      );
+    }
+  },
+  {
+    field: "Delete",
+    headerName: "",
+    width: 40,
+    renderCell: (cellValues) => {
+      return (
+        <DeleteIcon
+          variant="contained"
+          color="error"
+          onClick={(event) => {
+            handleDeleteClick(event, cellValues);
+          }}
+        />
+      );
+    }
+  },
+{
+  field: "Status",
+  headerName: "",
+  width: 40,
+  renderCell: (cellValues) => {
+    return (
+      <ChevronRightIcon
+        variant="contained"
+        color="error"
+        onClick={(event) => {
+            console.log(event);
+            navigate(`/employeeStatus/?email=${cellValues.row.email}`);
+        }}
+      />
+    );
+  }
+}
 ];
+const navigate = useNavigate();
+ const handleEditClick = (event, cellValues)=>{
+    console.log("clicked edit");
+    navigate(`/addEmployee/?email=${cellValues.row.email}`)
+ }
+ const handleDeleteClick = (event, cellValues)=>{
+    console.log("clicked delete", event, cellValues.row);
+    const list = JSON.parse(localStorage.getItem('list'));
+    const initialList = JSON.parse(localStorage.getItem('initialList'));
+    const updatedList = list.filter((el) => el.email !== cellValues.row.email);
+    const updatedInitialList = initialList.filter((el)=> el.email !== cellValues.row.email);
+    localStorage.setItem('initialList', JSON.stringify(updatedInitialList));
+    localStorage.setItem('list', JSON.stringify(updatedList));
+    // const empRows = [
+    //     ...initialData,
+    //     ...addedData
+    //   ];
+    //   console.log();
+ }
+ 
 
-function EmployeeTable() {
   const data = require('../utils/data.json');
+  localStorage.setItem('initialList', JSON.stringify(data.empsDetails));
+  localStorage.setItem('admins', JSON.stringify(data.empList));
+  const initialData = JSON.parse(localStorage.getItem('initialList'));
   const addedData = JSON.parse(localStorage.getItem('list'));
-  const navigate = useNavigate();
   const empRows = [
-    ...data.empsDetails,
+    ...initialData,
     ...addedData.filter((el) => !el.isAdmin),
   ];
-  const [select, setSelection] = useState([]);
   return (
     <div style={{ height: 400, width: '100%' }}>
       <Box
@@ -77,17 +151,6 @@ function EmployeeTable() {
           }}
           getRowId={(row) => row?.email}
           pageSizeOptions={[5, 10]}
-          checkboxSelection
-          onSelectionModelChange={(ids) => {
-            const selectedIDs = new Set(ids);
-            const selectedRowData = empRows.filter((row) =>
-              selectedIDs.has(row.email.toString())
-            );
-            console.log(selectedRowData);
-          }}
-          onRowClick={(el) => {
-            navigate(`/addEmployee/?email=${el.row.email}`);
-          }}
           getRowClassName={(params) =>
             params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
           }
