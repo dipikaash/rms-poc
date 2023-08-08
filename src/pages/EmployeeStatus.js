@@ -56,7 +56,7 @@ const EmployeeStatus = () =>{
               <Typography component="h1" variant="h5">
                 {myData.email}
               </Typography>
-              {/* <Typography component="h2" variant="h5">{myData.primarySkills ? myData.primarySkills.join('|')|| ''}</Typography> */}
+              <Typography component="h2" variant="h5">{myData.primarySkills ? myData.primarySkills.join('|'): ''}</Typography>
               <Box component="form"  sx={{ mt: 10}}>
               { loader ? (
           <h1 style={{ marginTop: '100px', textAlign: 'center' }}>

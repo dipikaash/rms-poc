@@ -31,7 +31,7 @@
     { "lastName": "Kannujiya", "firstName": "Shashikant", "email": "shashikant@happiestminds.com", "primarySkills": ["angular", "react"],"empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Beginner"},{"date": "2023-03-07", "skillLearning": "Java", "status": "Intermediate"},{"date": "2023-08-04", "skillLearning": "Node", "status": "Advance"},{"date": "2020-10-03", "skillLearning": "React", "status": "Proficient"}]},
     { "lastName": "Badave", "firstName": "Amrutha", "email": "amrutha@happiestminds.com", "primarySkills": ["angular", "Node.js"], "empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Advance"}]},
     { "lastName": "Shukla", "firstName": "Tripti", "email": "tripti@happiestminds.com", "primarySkills": ["angular", "Javascript", "Node.js"], "empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Proficient"}]},
-    { "lastName": "Khurana", "firstName": "Dimple","email": "dimple@happiestminds.com", "primarySkills": ["angular", "Python", "Vue.js"], "empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Intermediate"}]},
+    { "lastName": "Khurana", "firstName": "Dimple","email": "test@hm.com", "primarySkills": ["angular", "Python", "Vue.js"], "empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Intermediate"}]},
     { "lastName": null, "firstName": "Bala", "email": "subbu@happiestminds.com", "primarySkills": ["Javascript", "Node.js"], "empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Beginner"}] }
   ]
 }
