@@ -40,13 +40,13 @@ const StatusList = (props)=>{
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.empStatus.map((row) => (
-              <StyledTableRow key={row.skillLearning}>
+            {props?.empStatus?.map((row) => (
+              <StyledTableRow key={row?.skillLearning}>
                 <StyledTableCell component="th" scope="row">
-                  {row.date}
+                  {row?.date}
                 </StyledTableCell>
-                <StyledTableCell >{row.skillLearning}</StyledTableCell>
-                <StyledTableCell align="right">{row.status}</StyledTableCell>
+                <StyledTableCell >{row?.skillLearning}</StyledTableCell>
+                <StyledTableCell align="right">{row?.status}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
