@@ -8,7 +8,6 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { CircularProgress } from '@mui/material';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import StatusList from './StatusList';
 
 const EmployeeStatus = () =>{
@@ -20,8 +19,9 @@ const EmployeeStatus = () =>{
     const [myData, setMyData] = useState({});
   
     const getData = async () => {
-      const response = await axios.get('http://localhost:4000/Status');
-      localStorage.setItem('status', JSON.stringify(response.data));
+      const response = await fetch('http://localhost:4000/Status')
+      .then(response=>{ return response.json()})
+      .then(response=>{return localStorage.setItem('status', JSON.stringify(response))});
       setLoader(false);
     };
     useEffect(() => {
@@ -34,7 +34,6 @@ const EmployeeStatus = () =>{
         asyncFunction();
       }, []);
       
-      console.log(myData.empStatus,'...');
     return (
         <ThemeProvider theme={defaultTheme}>
           <Container component="main" maxWidth="xs">

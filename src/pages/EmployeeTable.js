@@ -6,7 +6,6 @@ import { json, useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Tooltip } from '@mui/material';
 
@@ -129,8 +128,11 @@ function EmployeeTable() {
   const [empRows, setEmpRows] = useState([]);
 
   const getData = async () => {
-    const response = await axios.get('http://localhost:4000/empsDetails/');
-    localStorage.setItem('list', JSON.stringify(response.data));
+    const response = await fetch('http://localhost:4000/empsDetails/')
+    .then(response=>{ return response?.json()}).then(
+      response =>{
+      localStorage.setItem('list', JSON.stringify(response));
+    });  
     setLoader(false);
   };
 
