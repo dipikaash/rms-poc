@@ -8,6 +8,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 const Header = () => {
     const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
+    
     return (
         <div className="header">
             <div className="logo">
@@ -18,7 +19,7 @@ const Header = () => {
                 <ul>
                     <li><Link to="/"><Button>Home</Button></Link></li>
                     <li><Link to="aboutUs"><Button>About Us</Button></Link></li>
-                    {isAuthenticated && (<li><Tooltip title="Profile"><Link to={`addEmployee?user=${user.email}`}><Button variant="text"><AccountCircleIcon />{user.name}</Button></Link></Tooltip></li>)}
+                    {isAuthenticated && (<li><Tooltip title="Profile"><Link to={`employeeStatus?email=${user.email}`}><Button variant="text"><AccountCircleIcon />{user.name}</Button></Link></Tooltip></li>)}
                     {isAuthenticated ? (<li><Tooltip title="Log out">
                         <IconButton aria-label="logout" variant="contained" color="error" size="small"
                             onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>

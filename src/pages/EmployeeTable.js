@@ -7,6 +7,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import axios from 'axios';
+import CircularProgress from '@mui/material/CircularProgress';
+import { Tooltip } from '@mui/material';
+
 function EmployeeTable() {
   const empCols = [
     {
@@ -57,13 +60,14 @@ function EmployeeTable() {
       width: 40,
       renderCell: (cellValues) => {
         return (
+          <Tooltip title="Edit">
           <EditIcon
             variant='contained'
-            color='secondary'
+            color='black'
             onClick={(event) => {
               handleEditClick(event, cellValues);
             }}
-          />
+          /></Tooltip>
         );
       },
     },
@@ -73,13 +77,14 @@ function EmployeeTable() {
       width: 40,
       renderCell: (cellValues) => {
         return (
+          <Tooltip title="Delete">
           <DeleteIcon
             variant='contained'
             color='error'
             onClick={(event) => {
               handleDeleteClick(event, cellValues);
             }}
-          />
+          /></Tooltip>
         );
       },
     },
@@ -89,14 +94,15 @@ function EmployeeTable() {
       width: 40,
       renderCell: (cellValues) => {
         return (
+          <Tooltip title="Detailed Status">
           <ChevronRightIcon
             variant='contained'
-            color='error'
+            color='primary'
             onClick={(event) => {
               console.log(event);
-              navigate(`/employeeStatus/?email=${cellValues.row.email}`);
+              navigate(`/employeeStatus?email=${cellValues.row.email}`);
             }}
-          />
+          /></Tooltip>
         );
       },
     },
@@ -151,9 +157,9 @@ function EmployeeTable() {
           },
         }}
       >
-        {loader && empRows.length > 0 ? (
+        {loader ? (
           <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
-            Loading Data Please wait....
+           <CircularProgress color='success' />
           </h1>
         ) : (
           <DataGrid
