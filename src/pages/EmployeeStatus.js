@@ -19,7 +19,7 @@ const EmployeeStatus = () =>{
     const [myData, setMyData] = useState({});
   
     const getData = async () => {
-      const response = await fetch('http://localhost:4000/Status')
+       await fetch('http://localhost:4000/Status')
       .then(response=>{ return response.json()})
       .then(response=>{return localStorage.setItem('status', JSON.stringify(response))});
       setLoader(false);
@@ -28,11 +28,11 @@ const EmployeeStatus = () =>{
         let asyncFunction = async () => {
             await getData();
             const empStatusData = await JSON.parse(localStorage.getItem('status'));
-            setMyData(empStatusData.find((el) => el.email == email));
+            setMyData(empStatusData.find((el) => el.email === email));
             setLoader(false);
         };
         asyncFunction();
-      }, []);
+      });
       
     return (
         <ThemeProvider theme={defaultTheme}>

@@ -8,7 +8,7 @@ const EmployeeData = () => {
     return (
         <>
             <h2 className="detailHead">Detailes of Employees in Pool
-                <Tooltip title="Add Employee">
+                <Tooltip title="Add Employee" className="addEmp">
                 <Link to="addEmployee"><Fab className="addEmp" color="success" aria-label="add"><AddIcon /></Fab></Link>
                 </Tooltip>
                 </h2>

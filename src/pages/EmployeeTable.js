@@ -2,10 +2,9 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import { json, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Tooltip } from '@mui/material';
 
@@ -65,6 +64,7 @@ function EmployeeTable() {
             color='black'
             onClick={(event) => {
               handleEditClick(event, cellValues);
+              event.stopPropagation();
             }}
           /></Tooltip>
         );
@@ -82,29 +82,12 @@ function EmployeeTable() {
             color='error'
             onClick={(event) => {
               handleDeleteClick(event, cellValues);
+              event.stopPropagation();
             }}
           /></Tooltip>
         );
       },
-    },
-    {
-      field: 'Status',
-      headerName: '',
-      width: 40,
-      renderCell: (cellValues) => {
-        return (
-          <Tooltip title="Detailed Status">
-          <ChevronRightIcon
-            variant='contained'
-            color='primary'
-            onClick={(event) => {
-              console.log(event);
-              navigate(`/employeeStatus?email=${cellValues.row.email}`);
-            }}
-          /></Tooltip>
-        );
-      },
-    },
+    }
   ];
   const navigate = useNavigate();
   const handleEditClick = (event, cellValues) => {
@@ -117,7 +100,7 @@ function EmployeeTable() {
     );
     if(confirm){
       let list = JSON.parse(localStorage.getItem('list')).filter(
-        (el) => el.email != cellValues.row.email
+        (el) => el.email !== cellValues.row.email
       );
       localStorage.setItem('list', JSON.stringify(list));
       setEmpRows([...list]);
@@ -128,7 +111,7 @@ function EmployeeTable() {
   const [empRows, setEmpRows] = useState([]);
 
   const getData = async () => {
-    const response = await fetch('http://localhost:4000/empsDetails/')
+    await fetch('http://localhost:4000/empsDetails/')
     .then(response=>{ return response?.json()}).then(
       response =>{
       localStorage.setItem('list', JSON.stringify(response));
@@ -169,11 +152,13 @@ function EmployeeTable() {
             columns={empCols}
             initialState={{
               pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
+                paginationModel: { page: 0, pageSize: 10 },
               },
             }}
             getRowId={(row) => row?.email}
-            pageSizeOptions={[5, 10]}
+            pageSizeOptions={[10,15]}
+            onRowClick={(event)=>{ 
+              navigate(`/employeeStatus?email=${event.row.email}`); }}
             getRowClassName={(params) =>
               params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
             }
