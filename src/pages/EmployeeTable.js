@@ -7,8 +7,15 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Tooltip } from '@mui/material';
+import AddEmployee from './AddEmployee';
+import AddIcon from '@mui/icons-material/Add';
+import Fab from "@mui/material/Fab";
+import {Link } from 'react-router-dom';
+import Popup from './Popup';
 
 function EmployeeTable() {
+  const [openPopup, setOpenPopup] = useState(false);
+  const [email, setEmail] = useState();
   const empCols = [
     {
       field: 'fullName',
@@ -90,10 +97,21 @@ function EmployeeTable() {
     }
   ];
   const navigate = useNavigate();
+   
   const handleEditClick = (event, cellValues) => {
-    console.log('clicked edit');
-    navigate(`/addEmployee/?email=${cellValues.row.email}`);
+    setEmail(cellValues.row.email);
+    setOpenPopup(true);
+    // navigate(`/addEmployee/?email=${cellValues.row.email}`);
   };
+  const handleAdd = () => {
+    setOpenPopup(true);
+    setEmail('');
+  }
+  const addOrEdit = () => {
+    let list = JSON.parse(localStorage.getItem('list'));
+    setEmpRows([...list]);
+    setOpenPopup(false);
+  }
   const handleDeleteClick = (event, cellValues) => {
     const confirm = window.confirm(
       `Are you sure to delete the record of ${cellValues.row.firstName} ?`
@@ -133,6 +151,12 @@ function EmployeeTable() {
   }, []);
 
   return (
+    <>
+    <h1 className="detailHead">Detailes of Employees in Pool
+      <Tooltip title="Add Employee" className="addEmp">
+          <Link onClick={()=>{handleAdd()}}><Fab className="addEmp" color="success" aria-label="add"><AddIcon /></Fab></Link>
+      </Tooltip>
+      </h1>
     <div style={{ height: 400, width: '100%' }}>
       <Box
         sx={{
@@ -166,6 +190,15 @@ function EmployeeTable() {
         )}
       </Box>
     </div>
+    <Popup 
+      openPopup={openPopup} 
+      setOpenPopup={setOpenPopup}
+      email={email}>
+      <AddEmployee 
+      email={email} 
+      addOrEdit={addOrEdit}/>
+    </Popup>
+    </>
   );
 }
 

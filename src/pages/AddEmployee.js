@@ -6,20 +6,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Input } from '@mui/material';
 import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+
 const defaultTheme = createTheme();
 
-export default function AddEmployee() {
-  let [searchParams] = useSearchParams();
-  const email = searchParams.get('email');
-
+export default function AddEmployee(props) {
+  const {email,addOrEdit} = props;
   const [inputs, setInputs] = useState({});
-  const navigate = useNavigate();
   const handleInputsChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -42,10 +38,10 @@ export default function AddEmployee() {
     let list = localStorage.getItem('list');
     if (list) {
       list = JSON.parse(list);
-      const existingData = list.find((el) => el.email == inputs.email);
+      const existingData = list.find((el) => el.email === inputs.email);
       if (existingData) {
         list = list.map((el) => {
-          if (el.email == inputs.email) {
+          if (el.email === inputs.email) {
             let obj = { ...el, ...inputs };
             return obj;
           } else return el;
@@ -58,15 +54,14 @@ export default function AddEmployee() {
     } else {
       localStorage.setItem('list', JSON.stringify([inputs]));
     }
-
-    navigate('/');
+    addOrEdit();
     setInputs({});
   };
 
   React.useEffect(() => {
     if (email) {
       const list = JSON.parse(localStorage.getItem('list'));
-      const myData = list.find((el) => el.email == email);
+      const myData = list.find((el) => el.email === email);
       if (myData) {
         setInputs({
           firstName: myData.firstName,
@@ -86,16 +81,12 @@ export default function AddEmployee() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
         >
-          <Typography component='h1' variant='h5'>
-            Add Employee
-          </Typography>
-          <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component='form' onSubmit={handleSubmit}>
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6}>
                 <TextField

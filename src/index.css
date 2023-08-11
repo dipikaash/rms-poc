@@ -2,12 +2,18 @@
   height: 50px;
   vertical-align: middle;
 }
+.container {
+  z-index: 0
+}
 .header {
   display: flex;
   justify-content: space-between;
   /* border: 1px solid lightgray; */
   border-radius: 5px;
   background-color: whitesmoke;
+  position: sticky;
+  top: 0;
+  z-index: 5;
 }
 .logo{
   margin: auto 0;
@@ -28,6 +34,7 @@
 .addEmp {
   float: right;
   margin-right: 10px !important;
+  z-index: 0 !important;
 }
 .even {
   background-color: lightgrey;
@@ -35,4 +42,6 @@
 .radio-flex{
   flex-direction: row;
 }
-
+.popupHead{
+  text-align: center;
+}

@@ -12,6 +12,11 @@
       "poolJoinedDate": "Tue Jul 25 2023 19:08:22 GMT+0530 (India Standard Time)",
       "poolEndDate": "",
       "primarySkills": "React, Javascript, HTML, CSS, Node JS"
+    },
+    {
+      "name": "test",
+      "email": "test@hm.com",
+      "isAdmin": "true"
     }
   ],
   "empsDetails": [
@@ -23,19 +28,32 @@
     { "lastName": null, "firstName": "Bala", "email": "subbu@happiestminds.com", "primarySkills": ["Javascript", "Node.js"], "poolJoinedDate": "2023-05-20", "poolEndDate": null, "isActive": true },
     { "lastName": "Chawla", "firstName": "Tara", "email": "tara@happiestminds.com", "primarySkills": ["angular", "C++", "Typescript"], "poolJoinedDate": "2023-03-12", "poolEndDate": null, "isActive": true },
     { "lastName": "Hussain", "firstName": "Jawwad", "email": "jd@happiestminds.com", "primarySkills": ["angular", "JavaScript"], "poolJoinedDate": "2023-08-21", "poolEndDate": null, "isActive": true },
-    { "lastName": "Np", "firstName": "Dinesh", "email": "dinesh@happiestminds.com", "primarySkills": ["angular", "Js", "TypeScript", "Vue.js"], "poolJoinedDate": "2023-08-01", "poolEndDate": null, "isActive": true }
-
+    { "lastName": "Np", "firstName": "Dinesh", "email": "dinesh@happiestminds.com", "primarySkills": ["angular", "JavaScript", "TypeScript", "Vue.js"], "poolJoinedDate": "2023-08-01", "poolEndDate": null, "isActive": false },
+    { "lastName": "Malhotra", "firstName": "Lakshay", "email": "lakshay@happiestminds.com", "primarySkills": ["angular", "Js", "Vue.js"], "poolJoinedDate": "2023-07-20", "poolEndDate": "2023-08-11", "isActive": true },
+    { "lastName": "Trivedi", "firstName": "Akhila", "email": "akhila@happiestminds.com", "primarySkills": ["React", "JavaScript", "TypeScript", "Vue.js"], "poolJoinedDate": "2023-08-11", "poolEndDate": null, "isActive": true },
+    { "lastName": "Lewis", "firstName": "Maria", "email": "maria@happiestminds.com", "primarySkills": ["Salseforce", "HTML","Java", "TypeScript", "Vue.js"], "poolJoinedDate": "2023-07-03", "poolEndDate": "2023-08-07", "isActive": false },
+    { "lastName": "Kumar", "firstName": "Ashish", "email": "ashish@happiestminds.com", "primarySkills": ["HTML", "CSS", "TypeScript", "React"], "poolJoinedDate": "2023-08-01", "poolEndDate": null, "isActive": true },
+    { "lastName": "Menon", "firstName": "Prachi", "email": "prachi@happiestminds.com", "primarySkills": ["angular", "Js", "TypeScript", "Vue.js"], "poolJoinedDate": "2023-08-01", "poolEndDate": null, "isActive": true },
+    { "lastName": "Reddy", "firstName": "Raghavendra", "email": "raghav@happiestminds.com", "primarySkills": ["HTML","CSS", "Java", "JavaScript"], "poolJoinedDate": "2022-06-09", "poolEndDate": "2022-07-20", "isActive": false },
+    { "lastName": "Singh", "firstName": "Jinesh", "email": "jinesh@happiestminds.com", "primarySkills": ["angular", "Java", "Vue.js"], "poolJoinedDate": "2023-05-01", "poolEndDate": "2023-07-13", "isActive": true }
   ],
   "Status": [
     { "lastName": "Roy", "firstName": "Abhijeet", "email": "abhijeet@happiestminds.com", "primarySkills": ["angular"], "empStatus": [{"date": "2023-08-02", "skillLearning": "Angular", "status": "learning"}, {"date": "2023-08-03", "skillLearning": "Java", "status": "learning"},{"date": "2022-06-03", "skillLearning": "Node", "status": "Advance"}]},
     { "lastName": "Kannujiya", "firstName": "Shashikant", "email": "shashikant@happiestminds.com", "primarySkills": ["angular", "react"],"empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Beginner"},{"date": "2023-03-07", "skillLearning": "Java", "status": "Intermediate"},{"date": "2023-08-04", "skillLearning": "Node", "status": "Advance"},{"date": "2020-10-03", "skillLearning": "React", "status": "Proficient"}]},
     { "lastName": "Badave", "firstName": "Amrutha", "email": "amrutha@happiestminds.com", "primarySkills": ["angular", "Node.js"], "empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Advance"}]},
-    { "lastName": "Shukla", "firstName": "Tripti", "email": "tripti@happiestminds.com", "primarySkills": ["angular", "Javascript", "Node.js"], "empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Proficient"}]},
-    { "lastName": "Khurana", "firstName": "Dimple","email": "test@hm.com", "primarySkills": ["angular", "Python", "Vue.js"], "empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Intermediate"}]},
+    { "lastName": "Test", "firstName": "Test", "email": "tripti@happiestminds.com", "primarySkills": ["angular", "Javascript", "Node.js"], "empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Proficient"}]},
+    { "lastName": "Khurana", "firstName": "Dimple","email": "test@hm.com", "primarySkills": ["angular", "Python", "Vue.js"], "empStatus": [{"date": "2023-08-04", "skillLearning": "TypeScript", "status": "Intermediate"}]},
     { "lastName": "Khurana", "firstName": "Dimple","email": "dimple@happiestminds.com", "primarySkills": ["angular", "Python", "Vue.js"], "empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Intermediate"}]},
     { "lastName": null, "firstName": "Bala", "email": "subbu@happiestminds.com", "primarySkills": ["Javascript", "Node.js"], "empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Beginner"}] },
     { "lastName": "Chawla", "firstName": "Tara", "email": "tara@happiestminds.com", "primarySkills": ["angular", "C++", "Typescript"],"empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Proficient"}]},
     { "lastName": "Hussain", "firstName": "Jawwad", "email": "jd@happiestminds.com", "primarySkills": ["angular", "JavaScript"],"empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Beginner"},{"date": "2023-03-07", "skillLearning": "Java", "status": "Intermediate"},{"date": "2023-08-04", "skillLearning": "Node", "status": "Advance"},{"date": "2020-10-03", "skillLearning": "React", "status": "Proficient"}]},
-    { "lastName": "Np", "firstName": "Dinesh", "email": "dinesh@happiestminds.com", "primarySkills": ["angular", "Js", "TypeScript", "Vue.js"],"empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Beginner"},{"date": "2023-03-07", "skillLearning": "Java", "status": "Intermediate"},{"date": "2023-08-04", "skillLearning": "Node", "status": "Advance"},{"date": "2020-10-03", "skillLearning": "React", "status": "Proficient"}]}
+    { "lastName": "Np", "firstName": "Dinesh", "email": "dinesh@happiestminds.com", "primarySkills": ["angular", "Js", "TypeScript", "Vue.js"],"empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Beginner"},{"date": "2023-03-07", "skillLearning": "Java", "status": "Intermediate"},{"date": "2023-08-04", "skillLearning": "Node", "status": "Advance"},{"date": "2020-10-03", "skillLearning": "React", "status": "Proficient"}]},
+    { "lastName": "Malhotra", "firstName": "Lakshay", "email": "lakshay@happiestminds.com", "primarySkills": ["angular", "JavaScript", "Vue.js"],"empStatus": [{"date": "2023-08-03", "skillLearning": "TypeScript", "status": "Beginner"},{"date": "2023-03-20", "skillLearning": "React", "status": "Intermediate"},{"date": "2023-08-04", "skillLearning": "Node", "status": "Advance"}]},
+    { "lastName": "Trivedi", "firstName": "Akhila", "email": "akhila@happiestminds.com", "primarySkills": ["React", "JavaScript", "TypeScript", "Vue.js"],"empStatus": [{"date": "2023-07-14", "skillLearning": "JavaScript", "status": "Beginner"},{"date": "2023-03-07", "skillLearning": "Java", "status": "Intermediate"},{"date": "2023-08-04", "skillLearning": "Node", "status": "Advance"},{"date": "2020-10-03", "skillLearning": "React", "status": "Proficient"}]},
+    { "lastName": "Lewis", "firstName": "Maria", "email": "maria@happiestminds.com", "primarySkills": ["Salseforce", "HTML","Java", "TypeScript", "Vue.js"],"empStatus": [{"date": "2023-06-04", "skillLearning": "JavaScript", "status": "Advance"}]},
+    { "lastName": "Kumar", "firstName": "Ashish", "email": "ashish@happiestminds.com", "primarySkills": ["HTML", "CSS", "TypeScript", "React"],"empStatus": [{"date": "2023-03-04", "skillLearning": "React", "status": "Advance"},{"date": "2023-03-07", "skillLearning": "Java", "status": "Intermediate"}]},
+    { "lastName": "Menon", "firstName": "Prachi", "email": "prachi@happiestminds.com", "primarySkills": ["angular", "Js", "TypeScript", "Vue.js"],"empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Advance"}]},
+    { "lastName": "Reddy", "firstName": "Raghavendra", "email": "raghav@happiestminds.com", "primarySkills": ["HTML","CSS", "Java", "JavaScript"], "empStatus": [{"date": "2023-08-02", "skillLearning": "Angular", "status": "learning"}, {"date": "2023-08-03", "skillLearning": "Java", "status": "learning"},{"date": "2022-06-03", "skillLearning": "Node", "status": "Advance"}]},
+    { "lastName": "Singh", "firstName": "Jinesh", "email": "jinesh@happiestminds.com", "primarySkills": ["angular", "Java", "Vue.js"],"empStatus": [{"date": "2023-08-04", "skillLearning": "JavaScript", "status": "Proficient"}]}
   ]
 }
