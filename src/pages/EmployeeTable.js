@@ -175,6 +175,9 @@ function EmployeeTable() {
             rows={empRows}
             columns={empCols}
             initialState={{
+              sorting: {
+                sortModel: [{ field: 'poolJoinedDate', sort: 'asc' }],
+              },
               pagination: {
                 paginationModel: { page: 0, pageSize: 10 },
               },
