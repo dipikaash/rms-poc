@@ -6,9 +6,13 @@ export const loginUser = createAsyncThunk(
      await fetch('http://localhost:4000/empList/')
        .then(response=>{ return response?.json()})
        .then(response => {
-        const user = response.find((el) => el.email === userCredentials.email);
+        let user = response.find((el) => el.email === userCredentials.email);
         if(user)
         localStorage.setItem('user',JSON.stringify(user));
+        else {
+        localStorage.removeItem('user');
+        user = null;
+        }
         return user;
     });
     }

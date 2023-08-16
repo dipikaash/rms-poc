@@ -20,26 +20,31 @@ const Login = ()=>{
  const [email, setEmail] = useState('');
  const [password, setPassword] = useState('');
  const [showError, setShowError] = useState(false);
+ const [userNotFound, setUserNotFound] = useState(false);
 
   const dispatch = useDispatch();
   const handleSubmit = (event) => {
+    
     event.preventDefault();
     let userCredentials = {
       email, password
     }
     dispatch(loginUser(userCredentials)).then((result)=>{
       let user = localStorage.getItem('user');
-      if(user)
+      if(user){
         user = JSON.parse(user);
-      if(user.isAdmin){
+      if(user?.isAdmin){
         setEmail('');
         setPassword('');
         navigate('/');
       }
       else
         setShowError(true);
-       
+    }
+    else 
+     setUserNotFound(true);
     })
+    console.log(showError,userNotFound,"not admin or not user");
   };
     return(
         <ThemeProvider theme={defaultTheme}>
@@ -92,17 +97,13 @@ const Login = ()=>{
               >
                 Sign In
               </Button>
-              { showError && <Alert severity="error" >Not an Admin, Try with different user</Alert>}
+              { userNotFound && <Alert severity="error" >Not a Happiest minds employee! Try again</Alert>}
+              {!userNotFound && showError && <Alert severity="error" >Not an Admin, Try with different user</Alert>}
             </Box>
           </Box>
         </Container>
       </ThemeProvider>
     );
-//         <FormControl>
-//   <InputLabel htmlFor="my-input">Email address</InputLabel>
-//   <Input id="my-input" aria-describedby="my-helper-text" />
-//   <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
-// </FormControl>
-    
+ 
 }
 export default Login;
