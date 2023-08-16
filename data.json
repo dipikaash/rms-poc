@@ -3,12 +3,12 @@
     {
       "name": "Muralidhar Reddy Gajjala",
       "email": "gmuralidhar.reddy@happiestminds.com",
-      "isAdmin": "true"
+      "isAdmin": true
     },
     {
       "name": "Chandrasekhar N",
       "email": "chandrashekhara.n@happiestminds.com",
-      "isAdmin": "false",
+      "isAdmin": false,
       "poolJoinedDate": "Tue Jul 25 2023 19:08:22 GMT+0530 (India Standard Time)",
       "poolEndDate": "",
       "primarySkills": "React, Javascript, HTML, CSS, Node JS"
@@ -16,7 +16,7 @@
     {
       "name": "test",
       "email": "test@hm.com",
-      "isAdmin": "true"
+      "isAdmin": true
     }
   ],
   "empsDetails": [

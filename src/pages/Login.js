@@ -8,43 +8,38 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../Store/UserSlice';
+import Alert from '@mui/material/Alert/Alert';
 
 const Login = ()=>{
  const defaultTheme = createTheme();
  const navigate = useNavigate();
+ const [email, setEmail] = useState('');
+ const [password, setPassword] = useState('');
  const [showError, setShowError] = useState(false);
- const getData = async () => {
-    await fetch('http://localhost:4000/empList/')
-    .then(response=>{ return response?.json()}).then(
-      response =>{
-      localStorage.setItem('admins', JSON.stringify(response));
-    });  
-  };
-  useEffect(() => {
-    let asyncFunction = async () => {
-        await getData();
-   // const adminData = await JSON.parse(localStorage.getItem('list'));
-    asyncFunction();
-  }} );
+
+  const dispatch = useDispatch();
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    const email = data.get('email');
-    const adminData = JSON.parse(localStorage.getItem('list'));
-    const user = adminData.filter((item)=>item.email === email);
-    if(user?.isAdmin) {
-        localStorage.setItem('user', JSON.stringify(user));
-        navigate(`/`);
+    let userCredentials = {
+      email, password
     }
-     
-    else 
-      setShowError(true);
+    dispatch(loginUser(userCredentials)).then((result)=>{
+      let user = localStorage.getItem('user');
+      if(user)
+        user = JSON.parse(user);
+      if(user.isAdmin){
+        setEmail('');
+        setPassword('');
+        navigate('/');
+      }
+      else
+        setShowError(true);
+       
+    })
   };
     return(
         <ThemeProvider theme={defaultTheme}>
@@ -74,6 +69,8 @@ const Login = ()=>{
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)}
               />
               <TextField
                 margin="normal"
@@ -84,6 +81,8 @@ const Login = ()=>{
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
               />
               <Button
                 type="submit"
@@ -93,7 +92,7 @@ const Login = ()=>{
               >
                 Sign In
               </Button>
-              { showError && <div >Try with different user</div>}
+              { showError && <Alert severity="error" >Not an Admin, Try with different user</Alert>}
             </Box>
           </Box>
         </Container>

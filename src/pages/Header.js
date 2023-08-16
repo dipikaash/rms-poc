@@ -1,14 +1,28 @@
 import {Link } from 'react-router-dom'
-import { useAuth0 } from "@auth0/auth0-react";
 import { Button, IconButton } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Tooltip from '@mui/material/Tooltip';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+function getUser () {
+    let user = localStorage.getItem('user');
+    if(user)
+     user = JSON.parse(user);
+    else 
+     user = null;
+    return user;
+}
 const Header = () => {
-    const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
-    
+
+    const [user, setUser] = useState(getUser());
+    const navigate = useNavigate();
+    const handleLogout = ()=>{
+        localStorage.removeItem('user');
+        setUser(null);
+    }
     return (
         <div className="header">
             <div className="logo">
@@ -20,14 +34,14 @@ const Header = () => {
                     <li><Link to="/"><Button>Home</Button></Link></li>
                     <li><Link to="aboutUs"><Button>About Us</Button></Link></li>
                     <li><Link to="https://www.happiestminds.com/location/"><Button>Contact Us</Button></Link></li>
-                    {isAuthenticated && (<li><Tooltip title="Profile"><Link to={`employeeStatus?email=${user.email}`}><Button variant="text"><AccountCircleIcon />{user.name}</Button></Link></Tooltip></li>)}
-                    {isAuthenticated ? (<li><Tooltip title="Log out">
+                    {user && (<li><Tooltip title="Profile"><Link to={`employeeStatus?email=${user.email}`}><Button variant="text"><AccountCircleIcon />{user.name}</Button></Link></Tooltip></li>)}
+                    {user && user.isAdmin ? (<li><Tooltip title="Log out">
                         <IconButton aria-label="logout" variant="contained" color="error" size="small"
-                            onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+                            onClick={handleLogout}>
                             <LogoutIcon />
                         </IconButton></Tooltip></li>) :
                         (<li><Tooltip title="Log In">
-                            <IconButton aria-label="login" variant="contained" color="primary" size="small" onClick={() => loginWithRedirect()}>
+                            <IconButton aria-label="login" variant="contained" color="primary" size="small" onClick={(event)=>{ navigate('/login')}}>
                                 <LoginIcon />
                             </IconButton></Tooltip>
                         </li>)}
