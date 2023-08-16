@@ -32,19 +32,17 @@ const Login = ()=>{
     dispatch(loginUser(userCredentials)).then((result)=>{
       let user = localStorage.getItem('user');
       if(user){
+        setUserNotFound(false);
         user = JSON.parse(user);
       if(user?.isAdmin){
         setEmail('');
         setPassword('');
         navigate('/');
       }
-      else
-        setShowError(true);
+      else setShowError(true);
     }
-    else 
-     setUserNotFound(true);
+    else setUserNotFound(true);
     })
-    // console.log(showError,userNotFound,"not admin or not user");
   };
     return(
         <ThemeProvider theme={defaultTheme}>
