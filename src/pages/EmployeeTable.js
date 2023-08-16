@@ -12,6 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Fab from "@mui/material/Fab";
 import {Link } from 'react-router-dom';
 import Popup from './Popup';
+import { hostname } from '../utils/config';
 
 function EmployeeTable() {
   const [openPopup, setOpenPopup] = useState(false);
@@ -129,7 +130,7 @@ function EmployeeTable() {
   const [empRows, setEmpRows] = useState([]);
 
   const getData = async () => {
-    await fetch('http://localhost:4000/empsDetails/')
+    await fetch(`${hostname}/empsDetails/`)
     .then(response=>{ return response?.json()}).then(
       response =>{
       localStorage.setItem('list', JSON.stringify(response));

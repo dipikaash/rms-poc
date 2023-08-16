@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { hostname } from "../utils/config";
 
 export const loginUser = createAsyncThunk(
     'user/loginUser',
     async(userCredentials)=>{
-     await fetch('http://localhost:4000/empList/')
+     await fetch(`${hostname}/empList/`)
        .then(response=>{ return response?.json()})
        .then(response => {
         let user = response.find((el) => el.email === userCredentials.email);

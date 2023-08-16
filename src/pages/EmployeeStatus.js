@@ -9,6 +9,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { CircularProgress } from '@mui/material';
 import { useState, useEffect } from 'react';
 import StatusList from './StatusList';
+import { hostname } from '../utils/config';
 
 const EmployeeStatus = () =>{
     let [searchParams] = useSearchParams();
@@ -19,7 +20,7 @@ const EmployeeStatus = () =>{
     const [myData, setMyData] = useState({});
   
     const getData = async () => {
-       await fetch('http://localhost:4000/Status')
+       await fetch(`${hostname}/Status`)
       .then(response=>{ return response.json()})
       .then(response=>{return localStorage.setItem('status', JSON.stringify(response))});
       setLoader(false);
