@@ -7,12 +7,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Tooltip } from '@mui/material';
-import AddEmployee from './AddEmployee';
+import AddEmployee from '../popup/AddEmployee';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from "@mui/material/Fab";
 import {Link } from 'react-router-dom';
-import Popup from './Popup';
-import { hostname } from '../utils/config';
+import Popup from '../popup/Popup';
+import { hostname } from '../../utils/config';
 
 function EmployeeTable() {
   const [openPopup, setOpenPopup] = useState(false);

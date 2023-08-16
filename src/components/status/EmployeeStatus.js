@@ -9,7 +9,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { CircularProgress } from '@mui/material';
 import { useState, useEffect } from 'react';
 import StatusList from './StatusList';
-import { hostname } from '../utils/config';
+import { hostname } from '../../utils/config';
 
 const EmployeeStatus = () =>{
     let [searchParams] = useSearchParams();

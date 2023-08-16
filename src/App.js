@@ -2,10 +2,10 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
-import EmployeeTable from './pages/EmployeeTable';
+import EmployeeTable from './components/employeeDetail/EmployeeTable';
 import Login from './pages/Login';
-import AddEmployee from './pages/AddEmployee';
-import EmployeeStatus from './pages/EmployeeStatus';
+import AddEmployee from './components/popup/AddEmployee';
+import EmployeeStatus from './components/status/EmployeeStatus';
 
 function App() {
   return (
