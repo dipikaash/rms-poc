@@ -151,6 +151,7 @@ export default function AddEmployee(props) {
               {!isAdmin && (
                 <>
                   <Grid item xs={12} sm={6}>
+                  <label>pool Joined Date</label>
                     <Input
                       name='poolJoinedDate'
                       type='date'
@@ -162,6 +163,7 @@ export default function AddEmployee(props) {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
+                    <label>pool End Date</label>
                     <Input
                       autoComplete='given-name'
                       name='poolEndDate'
