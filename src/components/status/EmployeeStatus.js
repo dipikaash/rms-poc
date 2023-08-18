@@ -9,7 +9,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { CircularProgress } from '@mui/material';
 import { useState, useEffect } from 'react';
 import StatusList from './StatusList';
-import { hostname } from '../../utils/config';
+import { getStatusData } from '../../api';
 
 const EmployeeStatus = () =>{
     let [searchParams] = useSearchParams();
@@ -19,15 +19,9 @@ const EmployeeStatus = () =>{
     const [loader, setLoader] = useState(true);
     const [myData, setMyData] = useState({});
   
-    const getData = async () => {
-       await fetch(`${hostname}/Status`, {method: "GET"})
-      .then(response=>{ return response.json()})
-      .then(response=>{return localStorage.setItem('status', JSON.stringify(response))});
-      setLoader(false);
-    };
     useEffect(() => {
         let asyncFunction = async () => {
-            await getData();
+            await getStatusData();
             const empStatusData = await JSON.parse(localStorage.getItem('status'));
             setMyData(empStatusData.find((el) => el.email === email));
             setLoader(false);

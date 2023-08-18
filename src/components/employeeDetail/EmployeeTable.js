@@ -12,7 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Fab from "@mui/material/Fab";
 import {Link } from 'react-router-dom';
 import Popup from '../popup/Popup';
-import { hostname } from '../../utils/config';
+import { getData } from '../../api';
 
 const datagridSx = {
   "& .MuiDataGrid-main":{
@@ -134,15 +134,6 @@ function EmployeeTable() {
 
   const [loader, setLoader] = useState(true);
   const [empRows, setEmpRows] = useState([]);
-
-  const getData = async () => {
-    await fetch(`${hostname}/empsDetails/`, {method: "GET"})
-    .then(response=>{ return response?.json()}).then(
-      response =>{
-      localStorage.setItem('list', JSON.stringify(response));
-    });  
-    setLoader(false);
-  };
 
   useEffect(() => {
     let asyncFunction = async () => {
