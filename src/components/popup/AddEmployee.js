@@ -68,7 +68,7 @@ export default function AddEmployee(props) {
           email,
           lastName: myData.lastName,
           isAdmin: myData.isAdmin,
-          password: myData.password,
+          // password: myData.password,
           poolJoinedDate: myData.poolJoinedDate,
           poolEndDate: myData.poolEndDate,
         });
@@ -121,7 +121,7 @@ export default function AddEmployee(props) {
                   onChange={handleInputsChange}
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -132,7 +132,7 @@ export default function AddEmployee(props) {
                   value={inputs.password || ''}
                   onChange={handleInputsChange}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <FormControlLabel
                   control={

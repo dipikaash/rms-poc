@@ -14,6 +14,12 @@ import {Link } from 'react-router-dom';
 import Popup from '../popup/Popup';
 import { hostname } from '../../utils/config';
 
+const datagridSx = {
+  "& .MuiDataGrid-main":{
+    minHeight: 390,
+    maxHeight: 390
+  }
+}
 function EmployeeTable() {
   const [openPopup, setOpenPopup] = useState(false);
   const [email, setEmail] = useState();
@@ -175,6 +181,7 @@ function EmployeeTable() {
           <DataGrid
             rows={empRows}
             columns={empCols}
+            sx={datagridSx}
             initialState={{
               sorting: {
                 sortModel: [{ field: 'poolJoinedDate', sort: 'asc' }],

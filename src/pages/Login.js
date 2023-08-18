@@ -18,7 +18,6 @@ const Login = ()=>{
  const defaultTheme = createTheme();
  const navigate = useNavigate();
  const [email, setEmail] = useState('');
- const [password, setPassword] = useState('');
  const [showError, setShowError] = useState(false);
  const [userNotFound, setUserNotFound] = useState(false);
 
@@ -27,7 +26,7 @@ const Login = ()=>{
     
     event.preventDefault();
     let userCredentials = {
-      email, password
+      email
     }
     dispatch(loginUser(userCredentials)).then((result)=>{
       let user = localStorage.getItem('user');
@@ -36,7 +35,6 @@ const Login = ()=>{
         user = JSON.parse(user);
       if(user?.isAdmin){
         setEmail('');
-        setPassword('');
         navigate('/');
       }
       else setShowError(true);
@@ -74,18 +72,6 @@ const Login = ()=>{
                 autoFocus
                 value={email}
                 onChange={(e)=>setEmail(e.target.value)}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e)=>setPassword(e.target.value)}
               />
               <Button
                 type="submit"

@@ -9,7 +9,7 @@ export default function Popup (props){
     return (
         <Dialog open={openPopup}>
             <DialogTitle>
-             <Typography className="popupHead" component='h2' variant='h5'>
+             <Typography className="popupHead" >
              {title} Employee 
             <CloseIcon className="addEmp" variant="contained" color="error" onClick={()=>{setOpenPopup(false)}} />
           </Typography>
