@@ -28,7 +28,7 @@ function EmployeeTable() {
       field: 'fullName',
       headerName: 'Name',
       headerClassName: 'main-header',
-      width: 160,
+      width: 180,
       valueGetter: (params) =>
         `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     },
@@ -37,13 +37,13 @@ function EmployeeTable() {
       headerName: 'Email ID',
       headerClassName: 'main-header',
       type: 'email',
-      width: 230,
+      width: 250,
     },
     {
       field: 'primarySkills',
       headerClassName: 'main-header',
       headerName: 'Skillset',
-      width: 200,
+      width: 230,
     },
     {
       field: 'poolJoinedDate',
@@ -55,13 +55,13 @@ function EmployeeTable() {
       field: 'poolEndDate',
       headerClassName: 'main-header',
       headerName: 'Pool End Date',
-      width: 150,
+      width: 190,
     },
     {
       field: 'isActive',
       headerClassName: 'main-header',
       headerName: 'Status',
-      width: 120,
+      width: 110,
       valueGetter: (params) => {
         return params.row.isActive ? 'Active' : 'Inactive';
       },
