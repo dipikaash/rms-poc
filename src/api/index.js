@@ -8,7 +8,8 @@ export const getData = async () => {
   };
 
  export const getStatusData = async () => {
-    await fetch(`${hostname}/Status`, {method: "GET"})
+    let data = await fetch(`${hostname}/Status`, {method: "GET"})
    .then(response=>{ return response.json()})
-   .then(response=>{return localStorage.setItem('status', JSON.stringify(response))});
+   .then(response=>{return response});
+   return data;
  };

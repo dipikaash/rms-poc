@@ -21,9 +21,8 @@ const EmployeeStatus = () =>{
   
     useEffect(() => {
         let asyncFunction = async () => {
-            await getStatusData();
-            const empStatusData = await JSON.parse(localStorage.getItem('status'));
-            setMyData(empStatusData.find((el) => el.email === email));
+            const empStatusData = await getStatusData();
+            setMyData(empStatusData?.find((el) => el.email === email));
             setLoader(false);
         };
         asyncFunction();
