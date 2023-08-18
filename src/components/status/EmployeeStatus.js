@@ -20,7 +20,7 @@ const EmployeeStatus = () =>{
     const [myData, setMyData] = useState({});
   
     const getData = async () => {
-       await fetch(`${hostname}/Status`)
+       await fetch(`${hostname}/Status`, {method: "GET"})
       .then(response=>{ return response.json()})
       .then(response=>{return localStorage.setItem('status', JSON.stringify(response))});
       setLoader(false);

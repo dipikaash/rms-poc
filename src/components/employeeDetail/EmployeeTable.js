@@ -136,7 +136,7 @@ function EmployeeTable() {
   const [empRows, setEmpRows] = useState([]);
 
   const getData = async () => {
-    await fetch(`${hostname}/empsDetails/`)
+    await fetch(`${hostname}/empsDetails/`, {method: "GET"})
     .then(response=>{ return response?.json()}).then(
       response =>{
       localStorage.setItem('list', JSON.stringify(response));

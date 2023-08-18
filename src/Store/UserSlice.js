@@ -4,7 +4,7 @@ import { hostname } from "../utils/config";
 export const loginUser = createAsyncThunk(
     'user/loginUser',
     async(userCredentials)=>{
-     await fetch(`${hostname}/empList/`)
+     await fetch(`${hostname}/empList/`, {method: "GET"})
        .then(response=>{ return response?.json()})
        .then(response => {
         let user = response.find((el) => el.email === userCredentials.email);
