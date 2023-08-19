@@ -8,14 +8,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from './Home';
 
-// function getUser () {
-//     let user = localStorage.getItem('user');
-//     if(user)
-//      user = JSON.parse(user);
-//     else 
-//      user = null;
-//     return user;
-// }
 const Header = () => {
 
     const [user, setUser] = useState(getUser());

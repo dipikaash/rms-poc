@@ -54,7 +54,6 @@ export default function AddEmployee(props) {
           email,
           lastName: myData.lastName,
           isAdmin: myData.isAdmin,
-          // password: myData.password,
           poolJoinedDate: myData.poolJoinedDate,
           poolEndDate: myData.poolEndDate,
         });

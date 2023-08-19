@@ -38,7 +38,6 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        // console.log('action', action);
         state.loading = false;
         state.user = action.payload;
         state.error = null;
@@ -46,7 +45,6 @@ const userSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.user = null;
-        // console.log(action.error.message);
         if (action.error.message === 'Request failed with status code 401')
           state.error = 'Access Denied';
         else state.error = action.error.message;
