@@ -130,7 +130,7 @@ function EmployeeTable() {
 
   useEffect(() => {
     dispatch(fetchEmployeesData());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

@@ -6,7 +6,7 @@ import { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-function getUser () {
+export function getUser () {
     let user = localStorage.getItem('user');
     if(user)
      user = JSON.parse(user);

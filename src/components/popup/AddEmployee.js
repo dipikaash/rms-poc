@@ -60,7 +60,7 @@ export default function AddEmployee(props) {
         });
       }
     }
-  }, [email]);
+  }, [email,list]);
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component='main' maxWidth='xs'>
