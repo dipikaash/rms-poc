@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { hostname } from '../utils/config';
-import { GET_ALL_EMPLOYEES_DATA } from './userType';
+
+const GET_ALL_EMPLOYEES_DATA = 'GET_ALL_EMPLOYEES_DATA';
 const initialState = {
   employeesData: [],
 };
