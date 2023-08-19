@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { AddEditEmployees } from '../../Store/UserSlice';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -10,23 +11,28 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Input } from '@mui/material';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 const defaultTheme = createTheme();
 
 export default function AddEmployee(props) {
-  const {email,addOrEdit} = props;
+  const { email, addOrEdit } = props;
   const [inputs, setInputs] = useState({});
+  const [isAdmin, setIsAdmin] = React.useState(false);
+  const [isActive, setIsActive] = React.useState(true);
+  const dispatch = useDispatch();
+  const { employeesData: list } = useSelector((state) => state.employees);
   const handleInputsChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
 
     setInputs((values) => ({ ...values, [name]: value }));
   };
-  const [isActive, setIsActive] = React.useState(true);
+
   const handleActiveChange = (event) => {
     setIsActive(event.target.checked);
   };
-  const [isAdmin, setIsAdmin] = React.useState(false);
+
   const handleAdminChange = (event) => {
     setIsAdmin(event.target.checked);
   };
@@ -34,33 +40,13 @@ export default function AddEmployee(props) {
     event.preventDefault();
     inputs.isActive = isActive;
     inputs.isAdmin = isAdmin;
-
-    let list = localStorage.getItem('list');
-    if (list) {
-      list = JSON.parse(list);
-      const existingData = list.find((el) => el.email === inputs.email);
-      if (existingData) {
-        list = list.map((el) => {
-          if (el.email === inputs.email) {
-            let obj = { ...el, ...inputs };
-            return obj;
-          } else return el;
-        });
-        localStorage.setItem('list', JSON.stringify(list));
-      } else {
-        const newlist = [...list, inputs];
-        localStorage.setItem('list', JSON.stringify(newlist));
-      }
-    } else {
-      localStorage.setItem('list', JSON.stringify([inputs]));
-    }
+    dispatch(AddEditEmployees(inputs));
     addOrEdit();
     setInputs({});
   };
 
   React.useEffect(() => {
     if (email) {
-      const list = JSON.parse(localStorage.getItem('list'));
       const myData = list.find((el) => el.email === email);
       if (myData) {
         setInputs({
@@ -151,7 +137,7 @@ export default function AddEmployee(props) {
               {!isAdmin && (
                 <>
                   <Grid item xs={12} sm={6}>
-                  <label>pool Joined Date</label>
+                    <label>pool Joined Date</label>
                     <Input
                       name='poolJoinedDate'
                       type='date'

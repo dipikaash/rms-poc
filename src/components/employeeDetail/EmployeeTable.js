@@ -9,17 +9,17 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Tooltip } from '@mui/material';
 import AddEmployee from '../popup/AddEmployee';
 import AddIcon from '@mui/icons-material/Add';
-import Fab from "@mui/material/Fab";
-import {Link } from 'react-router-dom';
+import Fab from '@mui/material/Fab';
+import { Link } from 'react-router-dom';
 import Popup from '../popup/Popup';
-import { getData } from '../../api';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchEmployeesData, handleDelete } from '../../Store/UserSlice';
 const datagridSx = {
-  "& .MuiDataGrid-main":{
+  '& .MuiDataGrid-main': {
     minHeight: 390,
-    maxHeight: 390
-  }
-}
+    maxHeight: 390,
+  },
+};
 function EmployeeTable() {
   const [openPopup, setOpenPopup] = useState(false);
   const [email, setEmail] = useState();
@@ -72,15 +72,16 @@ function EmployeeTable() {
       width: 40,
       renderCell: (cellValues) => {
         return (
-          <Tooltip title="Edit">
-          <EditIcon
-            variant='contained'
-            color='black'
-            onClick={(event) => {
-              handleEditClick(event, cellValues);
-              event.stopPropagation();
-            }}
-          /></Tooltip>
+          <Tooltip title='Edit'>
+            <EditIcon
+              variant='contained'
+              color='black'
+              onClick={(event) => {
+                handleEditClick(event, cellValues);
+                event.stopPropagation();
+              }}
+            />
+          </Tooltip>
         );
       },
     },
@@ -90,116 +91,104 @@ function EmployeeTable() {
       width: 40,
       renderCell: (cellValues) => {
         return (
-          <Tooltip title="Delete">
-          <DeleteIcon
-            variant='contained'
-            color='error'
-            onClick={(event) => {
-              handleDeleteClick(event, cellValues);
-              event.stopPropagation();
-            }}
-          /></Tooltip>
+          <Tooltip title='Delete'>
+            <DeleteIcon
+              variant='contained'
+              color='error'
+              onClick={(event) => {
+                handleDeleteClick(event, cellValues);
+                event.stopPropagation();
+              }}
+            />
+          </Tooltip>
         );
       },
-    }
+    },
   ];
   const navigate = useNavigate();
-   
+  const dispatch = useDispatch();
+  const { employeesData: empRows } = useSelector((state) => state.employees);
   const handleEditClick = (event, cellValues) => {
     setEmail(cellValues.row.email);
     setOpenPopup(true);
-    // navigate(`/addEmployee/?email=${cellValues.row.email}`);
   };
   const handleAdd = () => {
     setOpenPopup(true);
     setEmail('');
-  }
+  };
   const addOrEdit = () => {
-    let list = JSON.parse(localStorage.getItem('list'));
-    setEmpRows([...list]);
     setOpenPopup(false);
-  }
+  };
   const handleDeleteClick = (event, cellValues) => {
     const confirm = window.confirm(
       `Are you sure to delete the record of ${cellValues.row.firstName} ?`
     );
-    if(confirm){
-      let list = JSON.parse(localStorage.getItem('list')).filter(
-        (el) => el.email !== cellValues.row.email
-      );
-      localStorage.setItem('list', JSON.stringify(list));
-      setEmpRows([...list]);
+    if (confirm) {
+      dispatch(handleDelete(cellValues.row.email));
     }
   };
 
-  const [loader, setLoader] = useState(true);
-  const [empRows, setEmpRows] = useState([]);
-
   useEffect(() => {
-    let asyncFunction = async () => {
-      let addedData = JSON.parse(localStorage.getItem('list'));
-      if (!addedData) {
-        await getData();
-      }
-      addedData = await JSON.parse(localStorage.getItem('list'));
-      setEmpRows([...addedData]);
-      setLoader(false);
-    };
-    asyncFunction();
+    dispatch(fetchEmployeesData());
   }, []);
 
   return (
     <>
-    <h1 className="detailHead">Detailes of Employees in Pool
-      <Tooltip title="Add Employee" className="addEmp">
-          <Link onClick={()=>{handleAdd()}}><Fab className="addEmp" color="success" aria-label="add"><AddIcon /></Fab></Link>
-      </Tooltip>
-      </h1>
-    <div style={{ height: 400, width: '100%' }}>
-      <Box
-        sx={{
-          '& .main-header': {
-            fontWeight: 'medium',
-            fontSize: 18,
-          },
-        }}
-      >
-        {loader ? (
-          <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
-           <CircularProgress color='success' />
-          </h1>
-        ) : (
-          <DataGrid
-            rows={empRows}
-            columns={empCols}
-            sx={datagridSx}
-            initialState={{
-              sorting: {
-                sortModel: [{ field: 'poolJoinedDate', sort: 'asc' }],
-              },
-              pagination: {
-                paginationModel: { page: 0, pageSize: 10 },
-              },
+      <h1 className='detailHead'>
+        Detailes of Employees in Pool
+        <Tooltip title='Add Employee' className='addEmp'>
+          <Link
+            onClick={() => {
+              handleAdd();
             }}
-            getRowId={(row) => row?.email}
-            pageSizeOptions={[10,15]}
-            onRowClick={(event)=>{ 
-              navigate(`/employeeStatus?email=${event.row.email}`); }}
-            getRowClassName={(params) =>
-              params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
-            }
-          />
-        )}
-      </Box>
-    </div>
-    <Popup 
-      openPopup={openPopup} 
-      setOpenPopup={setOpenPopup}
-      email={email}>
-      <AddEmployee 
-      email={email} 
-      addOrEdit={addOrEdit}/>
-    </Popup>
+          >
+            <Fab className='addEmp' color='success' aria-label='add'>
+              <AddIcon />
+            </Fab>
+          </Link>
+        </Tooltip>
+      </h1>
+      <div style={{ height: 400, width: '100%' }}>
+        <Box
+          sx={{
+            '& .main-header': {
+              fontWeight: 'medium',
+              fontSize: 18,
+            },
+          }}
+        >
+          {empRows.length < 1 ? (
+            <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
+              <CircularProgress color='success' />
+            </h1>
+          ) : (
+            <DataGrid
+              rows={empRows}
+              columns={empCols}
+              sx={datagridSx}
+              initialState={{
+                sorting: {
+                  sortModel: [{ field: 'poolJoinedDate', sort: 'asc' }],
+                },
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 10 },
+                },
+              }}
+              getRowId={(row) => row?.email}
+              pageSizeOptions={[10, 15]}
+              onRowClick={(event) => {
+                navigate(`/employeeStatus?email=${event.row.email}`);
+              }}
+              getRowClassName={(params) =>
+                params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
+              }
+            />
+          )}
+        </Box>
+      </div>
+      <Popup openPopup={openPopup} setOpenPopup={setOpenPopup} email={email}>
+        <AddEmployee email={email} addOrEdit={addOrEdit} />
+      </Popup>
     </>
   );
 }
