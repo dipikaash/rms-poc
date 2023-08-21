@@ -129,7 +129,7 @@ export default function AddEmployee(props) {
                       color='primary'
                     />
                   }
-                  label='Are you an admin?'
+                  label='Is this employee an admin?'
                   name='isAdmin'
                 />
               </Grid>
@@ -170,7 +170,7 @@ export default function AddEmployee(props) {
                           color='primary'
                         />
                       }
-                      label='Are you active?'
+                      label='Is employee active?'
                       name='isActive'
                     />
                   </Grid>

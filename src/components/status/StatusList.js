@@ -6,7 +6,6 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -30,22 +29,23 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const StatusList = (props) => {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500, }} aria-label="customized table">
+    <TableContainer sx={{ minWidth: "lg" }}>
+      <Table  aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Date</StyledTableCell>
-            <StyledTableCell >Skillset</StyledTableCell>
+            <StyledTableCell align='center'>Skillset</StyledTableCell>
             <StyledTableCell align='right'>Status</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props?.empStatus?.map((row) => (
+          {props?.empStatus?.sort((a, b) => a.date < b.date ? -1 : 1)
+          .map((row) => (
             <StyledTableRow key={row?.skillLearning}>
               <StyledTableCell component="th" scope="row">
                 {row?.date}
               </StyledTableCell>
-              <StyledTableCell >{row?.skillLearning}</StyledTableCell>
+              <StyledTableCell align='center'>{row?.skillLearning}</StyledTableCell>
               <StyledTableCell align="right">{row?.status}</StyledTableCell>
             </StyledTableRow>
           ))}
