@@ -59,7 +59,7 @@ export default function AddEmployee(props) {
         });
       }
     }
-  }, [email,list]);
+  }, [email, list]);
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component='main' maxWidth='xs'>
@@ -170,7 +170,7 @@ export default function AddEmployee(props) {
                           color='primary'
                         />
                       }
-                      label='Are you an active?'
+                      label='Are you active?'
                       name='isActive'
                     />
                   </Grid>

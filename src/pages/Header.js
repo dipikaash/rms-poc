@@ -1,4 +1,4 @@
-import {Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Button, IconButton } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
@@ -12,7 +12,7 @@ const Header = () => {
 
     const [user, setUser] = useState(getUser());
     const navigate = useNavigate();
-    const handleLogout = ()=>{
+    const handleLogout = () => {
         localStorage.removeItem('user');
         setUser(null);
         navigate('/login');
@@ -35,7 +35,7 @@ const Header = () => {
                             <LogoutIcon />
                         </IconButton></Tooltip></li>) :
                         (<li><Tooltip title="Log In">
-                            <IconButton aria-label="login" variant="contained" color="primary" size="small" onClick={(event)=>{ navigate('/login')}}>
+                            <IconButton aria-label="login" variant="contained" color="primary" size="small" onClick={(event) => { navigate('/login') }}>
                                 <LoginIcon />
                             </IconButton></Tooltip>
                         </li>)}
