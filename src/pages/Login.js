@@ -9,10 +9,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../Store/UserSlice';
 import Alert from '@mui/material/Alert/Alert';
+import { getUser } from './Home';
 
 const Login = () => {
   const defaultTheme = createTheme();
@@ -20,6 +21,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [showError, setShowError] = useState(false);
   const [userNotFound, setUserNotFound] = useState(false);
+  const [user] = useState(getUser());
 
   const dispatch = useDispatch();
   const handleSubmit = (event) => {
@@ -42,8 +44,9 @@ const Login = () => {
       else setUserNotFound(true);
     })
   };
-  return (
-    <ThemeProvider theme={defaultTheme}>
+  return (<>
+    { user ? <Navigate to="/" /> : 
+    (<ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -86,8 +89,8 @@ const Login = () => {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
-  );
+    </ThemeProvider>)}
+    </>);
 
 }
 export default Login;
