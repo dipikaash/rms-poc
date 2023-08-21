@@ -29,7 +29,7 @@ function EmployeeTable() {
       field: 'fullName',
       headerName: 'Name',
       headerClassName: 'main-header',
-      width: 180,
+      flex: 14,
       valueGetter: (params) =>
         `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     },
@@ -38,31 +38,31 @@ function EmployeeTable() {
       headerName: 'Email ID',
       headerClassName: 'main-header',
       type: 'email',
-      width: 250,
+      flex: 20,
     },
     {
       field: 'primarySkills',
       headerClassName: 'main-header',
       headerName: 'Skillset',
-      width: 230,
+      flex: 18,
     },
     {
       field: 'poolJoinedDate',
       headerClassName: 'main-header',
       headerName: 'Pool Joined Date',
-      width: 190,
+      flex: 15,
     },
     {
       field: 'poolEndDate',
       headerClassName: 'main-header',
       headerName: 'Pool End Date',
-      width: 190,
+      flex: 15,
     },
     {
       field: 'isActive',
       headerClassName: 'main-header',
       headerName: 'Status',
-      width: 110,
+      flex: 9,
       valueGetter: (params) => {
         return params.row.isActive ? 'Active' : 'Inactive';
       },
@@ -70,7 +70,7 @@ function EmployeeTable() {
     {
       field: 'Edit',
       headerName: '',
-      width: 40,
+      flex: 3,
       renderCell: (cellValues) => {
         return (
           <Tooltip title='Edit'>
@@ -89,7 +89,7 @@ function EmployeeTable() {
     {
       field: 'Delete',
       headerName: '',
-      width: 40,
+      flex: 3,
       renderCell: (cellValues) => {
         return (
           <Tooltip title='Delete'>
