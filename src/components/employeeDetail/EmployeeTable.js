@@ -13,7 +13,8 @@ import Fab from '@mui/material/Fab';
 import { Link } from 'react-router-dom';
 import Popup from '../popup/Popup';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchEmployeesData, handleDelete } from '../../Store/UserSlice';
+import { fetchEmployeesData } from '../../Store/UserSlice';
+import DeletePopup from '../popup/DeletePopup';
 
 const datagridSx = {
   '& .MuiDataGrid-main': {
@@ -23,7 +24,9 @@ const datagridSx = {
 };
 function EmployeeTable() {
   const [openPopup, setOpenPopup] = useState(false);
+  const [openDeletePopup, setOpenDeletePopup] = useState(false);
   const [email, setEmail] = useState();
+  const [deleteEmpDetail, setDeleteEmpDetail] = useState({});
   const empCols = [
     {
       field: 'fullName',
@@ -121,12 +124,8 @@ function EmployeeTable() {
     setOpenPopup(false);
   };
   const handleDeleteClick = (event, cellValues) => {
-    const confirm = window.confirm(
-      `Are you sure to delete the record of ${cellValues.row.firstName} ?`
-    );
-    if (confirm) {
-      dispatch(handleDelete(cellValues.row.email));
-    }
+    setDeleteEmpDetail(cellValues.row);
+    setOpenDeletePopup(true);
   };
 
   useEffect(() => {
@@ -190,6 +189,8 @@ function EmployeeTable() {
       <Popup openPopup={openPopup} setOpenPopup={setOpenPopup} email={email}>
         <AddEmployee email={email} addOrEdit={addOrEdit} />
       </Popup>
+      <DeletePopup openDeletePopup={openDeletePopup} setOpenDeletePopup={setOpenDeletePopup} deleteEmpDetail={deleteEmpDetail}>
+      </DeletePopup>
     </>
   );
 }
