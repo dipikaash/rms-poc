@@ -49,7 +49,7 @@ export default function DeletePopup(props) {
                         <Item>Skillset</Item>
                     </Grid>
                     <Grid item xs={8}>
-                        <Item>{deleteEmpDetail?.primarySkills?.join(",")}</Item>
+                        <Item>{deleteEmpDetail?.primarySkills ? deleteEmpDetail?.primarySkills?.join(",") : "Not Available"}</Item>
                     </Grid>
                     <Grid item xs={4}>
                         <Item>Pool Joining Date</Item>
