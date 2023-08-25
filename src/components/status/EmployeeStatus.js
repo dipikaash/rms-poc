@@ -42,21 +42,22 @@ const EmployeeStatus = () => {
           <Avatar sx={{ m: 1, bgcolor: 'green', width: 100, height: 100 }}>
             <AccountCircleIcon style={{ width: 100, height: 100 }} />
           </Avatar>
-          <Typography component="h1" variant="h5">
-            {myData?.firstName || ""} {myData?.lastName}
-          </Typography >
-          <Typography component="h1" variant="h5">
-            {myData?.email}
-          </Typography>
-          <Typography component="h2" variant="h5">{myData?.primarySkills ? myData?.primarySkills.join('|') : ''}</Typography>
-          <Box component="form" sx={{ mt: 10, width: '100%' }}>
-            {loader ? (
-              <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
-                <CircularProgress color='success' />
-              </h1>
-            ) : (<StatusList empStatus={myData?.empStatus} />)}
+          {myData ?
+            (<><Typography component="h1" variant="h5">
+              {myData?.firstName || ""} {myData?.lastName}
+            </Typography >
+              <Typography component="h1" variant="h5">
+                {myData?.email}
+              </Typography>
+              <Typography component="h2" variant="h5">{myData?.primarySkills ? myData?.primarySkills.join('|') : ''}</Typography>
+              <Box component="form" sx={{ mt: 10, width: '100%' }}>
+                {loader ? (
+                  <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
+                    <CircularProgress color='success' />
+                  </h1>
+                ) : (<StatusList empStatus={myData?.empStatus} />)}
 
-          </Box>
+              </Box></>) : (<Typography component="h2" variant="h5">Oops, No data available...</Typography>)}
         </Box>
       </Container>
     </ThemeProvider>
