@@ -37,44 +37,10 @@ export default function DeletePopup(props) {
                 <DialogContentText>
                     Are you sure to delete the record of {deleteEmpDetail?.firstName} {deleteEmpDetail?.lastName}
                 </DialogContentText>
-                <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={4}>
-                        <Item>Email</Item>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <Item>{deleteEmpDetail?.email}</Item>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Item>Skillset</Item>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <Item>{deleteEmpDetail?.primarySkills ? deleteEmpDetail?.primarySkills?.join(",") : "Not Available"}</Item>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Item>Pool Joining Date</Item>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <Item>{deleteEmpDetail?.poolJoinedDate}</Item>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Item>Pool End Date</Item>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <Item>{deleteEmpDetail?.poolEndDate ? deleteEmpDetail?.poolEndDate : "---"}</Item>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Item>Status</Item>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <Item>{deleteEmpDetail?.isActive ? 'Active' : 'Inactive'}</Item>
-                    </Grid>
-                </Grid>
-                </Box>
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => { setOpenDeletePopup(false) }} >Cancel</Button>
-                <Button onClick={handleDeleteClick}>Delete</Button>
+                <Button variant="outlined" onClick={() => { setOpenDeletePopup(false) }} >Cancel</Button>
+                <Button variant="contained" color="error" onClick={handleDeleteClick}>Delete</Button>
             </DialogActions>
         </Dialog>
     )

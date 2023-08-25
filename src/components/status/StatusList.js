@@ -34,7 +34,7 @@ const StatusList = (props) => {
         <TableHead>
           <TableRow>
             <StyledTableCell>Date</StyledTableCell>
-            <StyledTableCell align='center'>Skillset</StyledTableCell>
+            <StyledTableCell align='center'>Skills Learning</StyledTableCell>
             <StyledTableCell align='right'>Status</StyledTableCell>
           </TableRow>
         </TableHead>
