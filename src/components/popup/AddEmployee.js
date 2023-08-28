@@ -54,6 +54,7 @@ export default function AddEmployee(props) {
           email,
           lastName: myData.lastName,
           isAdmin: myData.isAdmin,
+          primarySkills: myData.primarySkills,
           poolJoinedDate: myData.poolJoinedDate,
           poolEndDate: myData.poolEndDate,
         });
@@ -135,6 +136,17 @@ export default function AddEmployee(props) {
               </Grid>
               {!isAdmin && (
                 <>
+                 <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  name='primarySkills'
+                  label='primarySkills'
+                  type='text'
+                  id='primarySkills'
+                  value={inputs.primarySkills || ''}
+                  onChange={handleInputsChange}
+                />
+              </Grid>    
                   <Grid item xs={12} sm={6}>
                     <label>pool Joined Date</label>
                     <Input
