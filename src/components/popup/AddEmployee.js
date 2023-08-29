@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { AddEditEmployees } from '../../Store/UserSlice';
+import { AddEmployees, EditEmployees } from '../../Store/UserSlice';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -40,7 +40,7 @@ export default function AddEmployee(props) {
     event.preventDefault();
     inputs.isActive = isActive;
     inputs.isAdmin = isAdmin;
-    dispatch(AddEditEmployees(inputs));
+    email? dispatch(EditEmployees(inputs)): dispatch(AddEmployees(inputs));
     addOrEdit();
     setInputs({});
   };

@@ -39,7 +39,7 @@ const StatusList = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props?.empStatus?.sort((a, b) => a.date < b.date ? -1 : 1)
+          {props?.empStatus?.sort((a, b) => a.date < b.date ? 1 : -1)
           .map((row) => (
             <StyledTableRow key={row?.skillLearning}>
               <StyledTableCell component="th" scope="row">
