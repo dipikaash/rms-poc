@@ -70,7 +70,17 @@ export const employees = createSlice({
         (el) => el.email !== email.payload
       );
     },
-    AddEditEmployees: (state, inputs) => {
+    AddEmployees: (state, inputs) => {   
+      let list = state.employeesData;
+      const existingData = list.find((el) => el.email === inputs.payload.email);
+      if (existingData) {
+        window.alert('Email already exists, try using different email');
+      } else {
+        const newList = [...list, inputs.payload];
+        state.employeesData = newList;
+      }
+    },
+    EditEmployees: (state, inputs) => {
       let list = state.employeesData;
       const existingData = list.find((el) => el.email === inputs.payload.email);
       if (existingData) {
@@ -85,7 +95,7 @@ export const employees = createSlice({
         const newList = [...list, inputs.payload];
         state.employeesData = newList;
       }
-    },
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchEmployeesData.fulfilled, (state, action) => {
@@ -93,5 +103,5 @@ export const employees = createSlice({
     });
   },
 });
-export const { handleDelete, AddEditEmployees } = employees.actions;
+export const { handleDelete, AddEmployees, EditEmployees } = employees.actions;
 export default userSlice.reducer;
