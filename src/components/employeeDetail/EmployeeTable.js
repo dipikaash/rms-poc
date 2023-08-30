@@ -13,7 +13,7 @@ import Fab from '@mui/material/Fab';
 import { Link } from 'react-router-dom';
 import Popup from '../popup/Popup';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchEmployeesData } from '../../Store/UserSlice';
+import { fetchEmployeesData } from '../../Store/EmployeeSlice';
 import DeletePopup from '../popup/DeletePopup';
 
 const datagridSx = {

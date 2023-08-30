@@ -3,7 +3,7 @@ import React from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { useDispatch } from 'react-redux';
-import { handleDelete } from "../../Store/UserSlice";
+import { handleDelete } from "../../Store/EmployeeSlice";
 import Button from '@mui/material/Button';
 
 export default function DeletePopup(props) {
