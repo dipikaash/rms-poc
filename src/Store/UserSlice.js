@@ -82,8 +82,6 @@ export const employees = createSlice({
     },
     EditEmployees: (state, inputs) => {
       let list = state.employeesData;
-      const existingData = list.find((el) => el.email === inputs.payload.email);
-      if (existingData) {
         list = list.map((el) => {
           if (el.email === inputs.payload.email) {
             let obj = { ...el, ...inputs.payload };
@@ -91,10 +89,6 @@ export const employees = createSlice({
           } else return el;
         });
         state.employeesData = list;
-      } else {
-        const newList = [...list, inputs.payload];
-        state.employeesData = newList;
-      }
     }
   },
   extraReducers: (builder) => {

@@ -105,6 +105,7 @@ export default function AddEmployee(props) {
                   type='email'
                   value={inputs.email || ''}
                   onChange={handleInputsChange}
+                  disabled= {email}
                 />
               </Grid>
               {/* <Grid item xs={12}>
