@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Tooltip } from '@mui/material';
+import { Grid, Tooltip,TextField } from '@mui/material';
 import AddEmployee from '../popup/AddEmployee';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
@@ -15,11 +15,13 @@ import Popup from '../popup/Popup';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchEmployeesData } from '../../Store/EmployeeSlice';
 import DeletePopup from '../popup/DeletePopup';
+import Typography from '@mui/material/Typography';
+
 
 const datagridSx = {
   '& .MuiDataGrid-main': {
-    minHeight: 390,
-    maxHeight: 390,
+    minHeight: 365,
+    maxHeight: 365,
   },
   // disable cell selection style
   '.MuiDataGrid-cell:focus': {
@@ -28,7 +30,10 @@ const datagridSx = {
   // pointer cursor on ALL rows
   '& .MuiDataGrid-row:hover': {
     cursor: 'pointer'
-  }
+  },
+  // '& .MuiSvgIcon-root': {
+  //   color: 'darkgoldenrod'
+  // }
 };
 function EmployeeTable() {
   const [openPopup, setOpenPopup] = useState(false);
@@ -87,7 +92,7 @@ function EmployeeTable() {
           <Tooltip title='Edit'>
             <EditIcon
               variant='contained'
-              color='black'
+              color='warning'
               onClick={(event) => {
                 handleEditClick(event, cellValues);
                 event.stopPropagation();
@@ -142,21 +147,9 @@ function EmployeeTable() {
 
   return (
     <>
-      <h1 className='detailHead'>
-        Detailes of Employees in Pool
-        <Tooltip title='Add Employee' className='addEmp'>
-          <Link
-            onClick={() => {
-              handleAdd();
-            }}
-          >
-            <Fab className='addEmp' color='success' aria-label='add'>
-              <AddIcon />
-            </Fab>
-          </Link>
-        </Tooltip>
-      </h1>
-      <div style={{ height: 400, width: '100%' }}>
+      <Typography  variant="h4" component="div" sx={{marginBottom: 4, marginTop: 1, textAlign: 'center'}}>
+        Details of Employees in Pool
+      </Typography>
         <Box
           sx={{
             '& .main-header': {
@@ -169,7 +162,17 @@ function EmployeeTable() {
             <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
               <CircularProgress color='success' />
             </h1>
-          ) : (
+          ) : (<Box sx={{margin: 2, marginTop: 0}}>
+            <Grid container></Grid>
+          <Grid container justifyContent="flex-end" marginBottom={2}>
+            <Tooltip title='Add Employee'>
+            <Link onClick={() => {handleAdd()}}>
+              <Fab color='primary' aria-label='add'>
+                <AddIcon />
+              </Fab>
+            </Link>
+          </Tooltip>
+          </Grid>
             <DataGrid
               rows={empRows}
               columns={empCols}
@@ -191,9 +194,8 @@ function EmployeeTable() {
                 params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
               }
             />
-          )}
+          </Box>)}
         </Box>
-      </div>
       <Popup openPopup={openPopup} setOpenPopup={setOpenPopup} email={email}>
         <AddEmployee email={email} addOrEdit={addOrEdit} />
       </Popup>
