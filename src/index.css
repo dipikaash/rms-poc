@@ -6,9 +6,6 @@
 .container {
   z-index: 0
 }
-.detailHead{
-  margin-bottom: 50px;
-}
 .addEmp {
   float: right;
   margin-right: 10px !important;
@@ -16,15 +13,4 @@
 }
 .even {
   background-color: lightgrey;
-}
-.radio-flex{
-  flex-direction: row;
-}
-.popupHead{
-  text-align: center;
-  font-size: 1.25rem !important;
-}
-.statusContainer{
-  padding: 0;
-  max-width: 100% !important;
 }

@@ -30,13 +30,13 @@ const EmployeeStatus = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" className='statusContainer'>
+      <Container component="main" maxWidth='xl' >
         <CssBaseline />
         <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'green', width: 100, height: 100 }}>

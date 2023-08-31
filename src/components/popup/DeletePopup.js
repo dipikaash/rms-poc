@@ -16,7 +16,7 @@ export default function DeletePopup(props) {
     return (
         <Dialog open={openDeletePopup}>
             <DialogTitle>
-                <Typography className="popupHead" color="error" >
+                <Typography variant="h6" component="div" color="error" >
                     Deletion Confirmation
                     <CloseIcon className="addEmp" variant="contained" color="error" onClick={() => { setOpenDeletePopup(false) }} />
                 </Typography>
