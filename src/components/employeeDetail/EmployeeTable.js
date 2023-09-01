@@ -16,9 +16,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchEmployeesData } from '../../Store/EmployeeSlice';
 import DeletePopup from '../popup/DeletePopup';
 import Typography from '@mui/material/Typography';
+import ClearIcon from '@mui/icons-material/Clear';
+import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
 
-
-const datagridSx = {
+export const datagridSx = {
   "&.MuiDataGrid-root": {
     borderRadius: "10px"
   },
@@ -140,6 +142,8 @@ function EmployeeTable() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { employeesData: empRows } = useSelector((state) => state.employees);
+  const [searchText, setSearchText] = useState('');
+  const [rows, setRows] = useState([]);
   const handleEditClick = (event, cellValues) => {
     setEmail(cellValues.row.email);
     setOpenPopup(true);
@@ -155,9 +159,22 @@ function EmployeeTable() {
     setDeleteEmpDetail(cellValues.row);
     setOpenDeletePopup(true);
   };
-
+  function escapeRegExp(value) {
+    return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+}
+const requestSearch = (searchValue) => {
+    const searchRegex = new RegExp(escapeRegExp(searchValue), 'i');
+    const filteredRows = empRows.filter((row) => {
+        return Object.keys(row)?.some((field) => {
+            return searchRegex.test(row[field]?.toString());
+        });
+    });
+    setRows(filteredRows);
+};
   useEffect(() => {
-    dispatch(fetchEmployeesData());
+    dispatch(fetchEmployeesData()).then((result)=>{
+      setRows(result.payload);
+    });
   }, [dispatch]);
 
   return (
@@ -173,13 +190,45 @@ function EmployeeTable() {
           },
         }}
       >
-        {empRows.length < 1 ? (
+        {rows.length < 1 ? (
           <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
             <CircularProgress color='success' />
           </h1>
         ) :
-          (<Box sx={{ margin: 2, marginTop: 0 }}>
-            <Grid container justifyContent="flex-end" marginBottom={2}>
+          (<Box sx={{ margin: 2, marginTop: 0 }}>     
+            <Grid container justifyContent="space-between" marginBottom={2}>
+            <Box>
+                    <TextField
+                        variant="standard"
+                        value={searchText}
+                        onChange={(e) => { setSearchText(e.target.value); requestSearch(e.target.value) }}
+                        placeholder="Search..."
+                        InputProps={{
+                            startAdornment: <SearchIcon fontSize="small" color="action" />,
+                            endAdornment: (
+                                <IconButton
+                                    title="Clear"
+                                    aria-label="Clear"
+                                    size="small"
+                                    style={{ visibility: searchText ? 'visible' : 'hidden', borderRadius: "57%", paddingRight: "1px", margin: "0", fontSize: "1.25rem" }}
+                                    onClick={(e) => {setSearchText(''); setRows(empRows)} }
+                                >
+                                    <ClearIcon fontSize="small" color="action" />
+                                </IconButton>
+                            ),
+                        }}
+                        sx={{
+                            width: { xs: 1, sm: 'auto' }, m: (theme) => theme.spacing(1, 0.5, 1.5),
+                            '& .MuiSvgIcon-root': {
+                                mr: 0.5,
+                            },
+                            '& .MuiInput-underline:before': {
+                                borderBottom: 1,
+                                borderColor: 'divider',
+                            },
+                        }}
+                    />
+                </Box>
               <Tooltip title='Add Employee'>
                 <Link onClick={() => { handleAdd() }}>
                   <Fab color='primary' aria-label='add'>
@@ -189,7 +238,8 @@ function EmployeeTable() {
               </Tooltip>
             </Grid>
             <DataGrid
-              rows={empRows}
+              disableColumnMenu
+              rows={rows}
               columns={empCols}
               sx={datagridSx}
               initialState={{

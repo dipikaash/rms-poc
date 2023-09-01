@@ -108,18 +108,6 @@ export default function AddEmployee(props) {
                   disabled= {email? true : false}
                 />
               </Grid>
-              {/* <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name='password'
-                  label='Password'
-                  type='password'
-                  id='password'
-                  value={inputs.password || ''}
-                  onChange={handleInputsChange}
-                />
-              </Grid> */}
               <Grid item xs={12}>
                 <FormControlLabel
                   control={
