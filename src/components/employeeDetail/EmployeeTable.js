@@ -108,7 +108,6 @@ function EmployeeTable() {
   const dispatch = useDispatch();
   const { employeesData: empRows } = useSelector((state) => state.employees);
   const [searchText, setSearchText] = useState('');
-  const [rows, setRows] = useState([]);
   const handleEditClick = (event, cellValues) => {
     setEmail(cellValues.row.email);
     setOpenPopup(true);
@@ -126,9 +125,7 @@ function EmployeeTable() {
   };
 
   useEffect(() => {
-    dispatch(fetchEmployeesData()).then((result)=>{
-      setRows(result.payload);
-    });
+    dispatch(fetchEmployeesData());
   }, [dispatch]);
 
   return (
@@ -144,7 +141,7 @@ function EmployeeTable() {
         ) :
           (<Box sx={{ margin: 2, marginTop: 0 }}>     
             <Grid container justifyContent="space-between" marginBottom={2}>
-               <SearchBar setRows={setRows} setSearchText={setSearchText} searchText={searchText} />
+               <SearchBar setSearchText={setSearchText} searchText={searchText} />
               <Tooltip title='Add Employee'>
                 <Link onClick={() => { handleAdd() }}>
                   <Fab color='primary' aria-label='add'>
@@ -153,7 +150,7 @@ function EmployeeTable() {
                 </Link>
               </Tooltip>
             </Grid>
-            <EmployeeGrid rows={rows} empCols={empCols} />
+            <EmployeeGrid empRows={empRows} empCols={empCols} />
           </Box>)}
       </Box>
       <Popup openPopup={openPopup} setOpenPopup={setOpenPopup} email={email}>

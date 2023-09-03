@@ -4,10 +4,13 @@ import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
+import { useDispatch } from 'react-redux';
+import {filterEmployees, fetchEmployeesData} from '../../Store/EmployeeSlice'
 
 const SearchBar =(props)=>{
-    const {setSearchText, setRows, searchText}=props;
+    const {setSearchText, searchText}=props;
     const { employeesData: empRows } = useSelector((state) => state.employees);
+    const dispatch = useDispatch();
     const requestSearch = (searchValue) => {
         const searchRegex = new RegExp(escapeRegExp(searchValue), 'i');
         const filteredRows = empRows.filter((row) => {
@@ -15,7 +18,7 @@ const SearchBar =(props)=>{
                 return searchRegex.test(row[field]?.toString());
             });
         });
-        setRows(filteredRows);
+        dispatch(filterEmployees(filteredRows));
     };
     function escapeRegExp(value) {
         return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
@@ -35,7 +38,7 @@ const SearchBar =(props)=>{
                     aria-label="Clear"
                     size="small"
                     style={{ visibility: searchText ? 'visible' : 'hidden', borderRadius: "57%", paddingRight: "1px", margin: "0", fontSize: "1.25rem" }}
-                    onClick={(e) => {setSearchText(''); setRows(empRows)} }
+                    onClick={(e) => {setSearchText(''); dispatch(fetchEmployeesData())} }
                 >
                     <ClearIcon fontSize="small" color="action" />
                 </IconButton>

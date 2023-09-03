@@ -3,12 +3,12 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
 
 const EmployeeGrid = (props) => { 
-    const {rows, empCols} = props;
+    const {empRows, empCols} = props;
     const navigate = useNavigate();
     return (
         <DataGrid
         disableColumnMenu
-        rows={rows}
+        rows={empRows}
         columns={empCols}
         sx={datagridSx}
         initialState={{

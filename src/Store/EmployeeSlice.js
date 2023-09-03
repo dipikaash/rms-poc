@@ -41,6 +41,10 @@ export const fetchEmployeesData = createAsyncThunk(
             } else return el;
           });
           state.employeesData = list;
+      },
+      filterEmployees: (state, inputs) => {
+        state.employeesData = inputs.payload;
+        console.log(state.employeesData);
       }
     },
     extraReducers: (builder) => {
@@ -49,4 +53,4 @@ export const fetchEmployeesData = createAsyncThunk(
       });
     },
   });
-  export const { handleDelete, AddEmployees, EditEmployees } = employees.actions;
+  export const { handleDelete, AddEmployees, EditEmployees, filterEmployees } = employees.actions;
