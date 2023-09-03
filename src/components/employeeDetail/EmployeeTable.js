@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Grid, Tooltip, TextField } from '@mui/material';
+import { Grid, Tooltip } from '@mui/material';
 import AddEmployee from '../popup/AddEmployee';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
@@ -16,42 +14,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchEmployeesData } from '../../Store/EmployeeSlice';
 import DeletePopup from '../popup/DeletePopup';
 import Typography from '@mui/material/Typography';
-import ClearIcon from '@mui/icons-material/Clear';
-import SearchIcon from '@mui/icons-material/Search';
-import IconButton from '@mui/material/IconButton';
+import EmployeeGrid from './EmployeeGrid';
+import { empHead, tableHead } from '../../utils/employeeConfig';
+import SearchBar from './SearchBar';
 
-export const datagridSx = {
-  "&.MuiDataGrid-root": {
-    borderRadius: "10px"
-  },
-  '& .MuiDataGrid-main': {
-    minHeight: 365,
-    maxHeight: 365,
-  },
-  '& .MuiDataGrid-columnHeaders': {
-    backgroundColor: 'black',
-    color: 'white'
-  },
-  '& .MuiDataGrid-columnHeader:focus': {
-    outline: 'none'
-  },
-  // disable cell selection style
-  '.MuiDataGrid-cell:focus': {
-    outline: 'none'
-  },
-  // pointer cursor on ALL rows
-  '& .MuiDataGrid-row:hover': {
-    cursor: 'pointer'
-  },
-  "& .MuiDataGrid-sortIcon": {
-    opacity: 1,
-    color: "white",
-  },
-  "& .MuiDataGrid-menuIconButton": {
-    opacity: 1,
-    color: "white"
-  }
-};
 function EmployeeTable() {
   const [openPopup, setOpenPopup] = useState(false);
   const [openDeletePopup, setOpenDeletePopup] = useState(false);
@@ -139,7 +105,6 @@ function EmployeeTable() {
       },
     },
   ];
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { employeesData: empRows } = useSelector((state) => state.employees);
   const [searchText, setSearchText] = useState('');
@@ -159,18 +124,7 @@ function EmployeeTable() {
     setDeleteEmpDetail(cellValues.row);
     setOpenDeletePopup(true);
   };
-  function escapeRegExp(value) {
-    return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-}
-const requestSearch = (searchValue) => {
-    const searchRegex = new RegExp(escapeRegExp(searchValue), 'i');
-    const filteredRows = empRows.filter((row) => {
-        return Object.keys(row)?.some((field) => {
-            return searchRegex.test(row[field]?.toString());
-        });
-    });
-    setRows(filteredRows);
-};
+
   useEffect(() => {
     dispatch(fetchEmployeesData()).then((result)=>{
       setRows(result.payload);
@@ -179,56 +133,18 @@ const requestSearch = (searchValue) => {
 
   return (
     <>
-      <Typography variant="h4" component="div" sx={{ marginBottom: 4, marginTop: 1, textAlign: 'center' }}>
+      <Typography variant="h4" component="div" sx={empHead}>
         Details of Employees in Pool
       </Typography>
-      <Box
-        sx={{
-          '& .main-header': {
-            fontWeight: 'medium',
-            fontSize: 18
-          },
-        }}
-      >
-        {rows.length < 1 ? (
-          <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
+      <Box sx={tableHead}>
+        {empRows.length < 1 ? (
+          <h1 className="loader">
             <CircularProgress color='success' />
           </h1>
         ) :
           (<Box sx={{ margin: 2, marginTop: 0 }}>     
             <Grid container justifyContent="space-between" marginBottom={2}>
-            <Box>
-                    <TextField
-                        variant="standard"
-                        value={searchText}
-                        onChange={(e) => { setSearchText(e.target.value); requestSearch(e.target.value) }}
-                        placeholder="Search..."
-                        InputProps={{
-                            startAdornment: <SearchIcon fontSize="small" color="action" />,
-                            endAdornment: (
-                                <IconButton
-                                    title="Clear"
-                                    aria-label="Clear"
-                                    size="small"
-                                    style={{ visibility: searchText ? 'visible' : 'hidden', borderRadius: "57%", paddingRight: "1px", margin: "0", fontSize: "1.25rem" }}
-                                    onClick={(e) => {setSearchText(''); setRows(empRows)} }
-                                >
-                                    <ClearIcon fontSize="small" color="action" />
-                                </IconButton>
-                            ),
-                        }}
-                        sx={{
-                            width: { xs: 1, sm: 'auto' }, m: (theme) => theme.spacing(1, 0.5, 1.5),
-                            '& .MuiSvgIcon-root': {
-                                mr: 0.5,
-                            },
-                            '& .MuiInput-underline:before': {
-                                borderBottom: 1,
-                                borderColor: 'divider',
-                            },
-                        }}
-                    />
-                </Box>
+               <SearchBar setRows={setRows} setSearchText={setSearchText} searchText={searchText} />
               <Tooltip title='Add Employee'>
                 <Link onClick={() => { handleAdd() }}>
                   <Fab color='primary' aria-label='add'>
@@ -237,28 +153,7 @@ const requestSearch = (searchValue) => {
                 </Link>
               </Tooltip>
             </Grid>
-            <DataGrid
-              disableColumnMenu
-              rows={rows}
-              columns={empCols}
-              sx={datagridSx}
-              initialState={{
-                sorting: {
-                  sortModel: [{ field: 'poolJoinedDate', sort: 'asc' }],
-                },
-                pagination: {
-                  paginationModel: { page: 0, pageSize: 10 },
-                },
-              }}
-              getRowId={(row) => row?.email}
-              pageSizeOptions={[10, 15]}
-              onRowClick={(event) => {
-                navigate(`/employeeStatus?email=${event.row.email}`);
-              }}
-              getRowClassName={(params) =>
-                params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
-              }
-            />
+            <EmployeeGrid rows={rows} empCols={empCols} />
           </Box>)}
       </Box>
       <Popup openPopup={openPopup} setOpenPopup={setOpenPopup} email={email}>

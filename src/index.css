@@ -14,3 +14,7 @@
 .even {
   background-color: lightgrey;
 }
+.loader {
+  margin-top: 100px;
+  text-align: center
+}

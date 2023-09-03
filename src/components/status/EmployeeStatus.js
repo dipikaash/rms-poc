@@ -26,7 +26,7 @@ const EmployeeStatus = () => {
       setLoader(false);
     };
     asyncFunction();
-  },[]);
+  },[email]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
