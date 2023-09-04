@@ -28,6 +28,7 @@ const StatusList = (props) => {
     <Box sx={statusHead}>
     <DataGrid
     disableColumnMenu
+    disableRowSelectionOnClick
     rows={props?.empStatus}
     columns={statusCols}
     sx={datagridSx}
