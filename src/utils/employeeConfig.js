@@ -4,11 +4,13 @@ export const datagridSx = {
         fontSize: 18
       },
     "&.MuiDataGrid-root": {
-      borderRadius: "10px"
+      borderRadius: "8px"
     },
     '& .MuiDataGrid-columnHeaders': {
       backgroundColor: 'black',
-      color: 'white'
+      color: 'white',
+      borderTopLeftRadius: '8px',
+      borderTopRightRadius: '8px'
     },
     '& .MuiDataGrid-columnHeader:focus': {
       outline: 'none'
