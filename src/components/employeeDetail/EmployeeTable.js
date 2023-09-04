@@ -106,7 +106,7 @@ function EmployeeTable() {
     },
   ];
   const dispatch = useDispatch();
-  const { employeesData: empRows } = useSelector((state) => state.employees);
+  const { employeesData: empRows, allEmployees: allEmpRows } = useSelector((state) => state.employees);
   const [searchText, setSearchText] = useState('');
   const handleEditClick = (event, cellValues) => {
     setEmail(cellValues.row.email);
@@ -134,14 +134,14 @@ function EmployeeTable() {
         Details of Employees in Pool
       </Typography>
       <Box sx={tableHead}>
-        {empRows.length < 1 ? (
+        {allEmpRows.length < 1 ? (
           <h1 className="loader">
             <CircularProgress color='success' />
           </h1>
         ) :
-          (<Box sx={{ margin: 2, marginTop: 0 }}>     
+          (<Box sx={{ margin: 2, marginTop: 0 }}>
             <Grid container justifyContent="space-between" marginBottom={2}>
-               <SearchBar setSearchText={setSearchText} searchText={searchText} />
+              <SearchBar setSearchText={setSearchText} searchText={searchText} />
               <Tooltip title='Add Employee'>
                 <Link onClick={() => { handleAdd() }}>
                   <Fab color='primary' aria-label='add'>
@@ -150,7 +150,9 @@ function EmployeeTable() {
                 </Link>
               </Tooltip>
             </Grid>
-            <EmployeeGrid empRows={empRows} empCols={empCols} />
+            {allEmpRows.length > 1 && empRows.length < 1 ?
+              (<Typography variant="h5" component="div" sx={empHead}>No Data available...</Typography>)
+              : <EmployeeGrid empRows={empRows} empCols={empCols} />}
           </Box>)}
       </Box>
       <Popup openPopup={openPopup} setOpenPopup={setOpenPopup} email={email}>
