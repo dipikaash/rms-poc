@@ -50,7 +50,7 @@ const EmployeeStatus = () => {
                 {myData?.email}
               </Typography>
               <Typography component="h2" variant="h5">{myData?.primarySkills ? myData?.primarySkills.join('|') : ''}</Typography>
-              <Box component="form" sx={{ mt: 10, width: '100%' }}>
+              <Box component="form" sx={{ mt: 5, width: '100%' }}>
                 {loader ? (
                   <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
                     <CircularProgress color='success' />

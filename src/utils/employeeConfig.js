@@ -1,10 +1,10 @@
 export const datagridSx = {
+    '& .main-header': {
+        fontWeight: 'medium',
+        fontSize: 18
+      },
     "&.MuiDataGrid-root": {
       borderRadius: "10px"
-    },
-    '& .MuiDataGrid-main': {
-      minHeight: 365,
-      maxHeight: 365,
     },
     '& .MuiDataGrid-columnHeaders': {
       backgroundColor: 'black',
@@ -36,8 +36,14 @@ export const datagridSx = {
     textAlign: 'center' 
 };
 export const tableHead = {
-    '& .main-header': {
-      fontWeight: 'medium',
-      fontSize: 18
-    },
+    '& .MuiDataGrid-main': {
+        minHeight: 365,
+        maxHeight: 365
+      },
+  };
+  export const statusHead = {
+    '& .MuiDataGrid-main': {
+        minHeight: 260,
+        maxHeight: 260
+      },
   };
