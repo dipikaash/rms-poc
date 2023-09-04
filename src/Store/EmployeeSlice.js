@@ -4,6 +4,7 @@ import { hostname } from '../utils/config';
 const GET_ALL_EMPLOYEES_DATA = 'GET_ALL_EMPLOYEES_DATA';
 const initialState = {
   employeesData: [],
+  allEmployees:[]
 };
 export const fetchEmployeesData = createAsyncThunk(
     'counter/fetchCount',
@@ -44,12 +45,12 @@ export const fetchEmployeesData = createAsyncThunk(
       },
       filterEmployees: (state, inputs) => {
         state.employeesData = inputs.payload;
-        console.log(state.employeesData);
       }
     },
     extraReducers: (builder) => {
       builder.addCase(fetchEmployeesData.fulfilled, (state, action) => {
         state.employeesData = action.payload;
+        state.allEmployees = action.payload;
       });
     },
   });

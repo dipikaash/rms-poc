@@ -5,15 +5,15 @@ import TextField from '@mui/material/TextField';
 import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import { useDispatch } from 'react-redux';
-import {filterEmployees, fetchEmployeesData} from '../../Store/EmployeeSlice'
+import {fetchEmployeesData, filterEmployees} from '../../Store/EmployeeSlice'
 
 const SearchBar =(props)=>{
     const {setSearchText, searchText}=props;
-    const { employeesData: empRows } = useSelector((state) => state.employees);
+    const { allEmployees: allEmpRows } = useSelector((state) => state.employees);
     const dispatch = useDispatch();
     const requestSearch = (searchValue) => {
         const searchRegex = new RegExp(escapeRegExp(searchValue), 'i');
-        const filteredRows = empRows.filter((row) => {
+        const filteredRows = allEmpRows.filter((row) => {
             return Object.keys(row)?.some((field) => {
                 return searchRegex.test(row[field]?.toString());
             });
