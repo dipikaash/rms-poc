@@ -75,7 +75,6 @@ function EmployeeTable() {
           <Tooltip title='Edit'>
             <EditIcon
               variant='contained'
-              color='warning'
               onClick={(event) => {
                 handleEditClick(event, cellValues);
                 event.stopPropagation();
@@ -144,7 +143,7 @@ function EmployeeTable() {
               <SearchBar setSearchText={setSearchText} searchText={searchText} />
               <Tooltip title='Add Employee'>
                 <Link onClick={() => { handleAdd() }}>
-                  <Fab color='primary' aria-label='add'>
+                  <Fab color='success' aria-label='add'>
                     <AddIcon />
                   </Fab>
                 </Link>

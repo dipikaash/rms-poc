@@ -1,8 +1,7 @@
 //import { Outlet, Link } from "react-router-dom";
 
-const Layout = () => {
+const AboutUs = () => {
   return (
-    <>
       <div className="container_page">
         <div className="tech_box_bg about-us-content">
           <span className="st_sharethis" st_url="https://www.happiestminds.com/about-us/" st_title="" st_summary="Happiest Minds is a leading next generation digital transformation, infrastructure, security, and product engineering services company." st_image="http://www.happiestminds.com/wp-content/themes/hmtheme/images/happiest_mind_logo01.png"></span>
@@ -66,8 +65,7 @@ const Layout = () => {
           </div>
         </div>
       </div>
-    </>
   )
 };
 
-export default Layout;
+export default AboutUs;

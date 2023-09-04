@@ -29,7 +29,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const StatusList = (props) => {
   return (
-    <TableContainer sx={{ minWidth: "lg", borderRadius: 2 }}>
+    <TableContainer sx={{ minWidth: "lg", borderRadius: 1 }}>
       <Table  aria-label="customized table">
         <TableHead>
           <TableRow>

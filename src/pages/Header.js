@@ -11,6 +11,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from './Home';
+import { primaryColor } from '../utils/theme';
 
 const defaultTheme = createTheme();
 
@@ -26,7 +27,7 @@ const Header = () => {
     return (
         <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
-        <AppBar position="sticky" sx={{background: '#328332'}}>
+        <AppBar position="sticky" sx={{background: primaryColor}}>
           <Toolbar>
             <Typography  variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 <Link to="/"><img alt="Happiest Minds" className="classLogo" src="https://www.bing.com/th?id=OIP.Cxwp2AvIVAXsGCHrmLX_VwHaC5&w=350&h=137&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2" /></Link>
