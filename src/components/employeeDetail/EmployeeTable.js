@@ -139,7 +139,7 @@ function EmployeeTable() {
           </h1>
         ) :
           (<Box sx={{ margin: 2, marginTop: 0 }}>
-            <Grid container justifyContent="space-between" marginBottom={2}>
+            <Grid container justifyContent="flex-end" marginBottom={2}>
               <SearchBar setSearchText={setSearchText} searchText={searchText} />
               <Tooltip title='Add Employee'>
                 <Link onClick={() => { handleAdd() }}>
